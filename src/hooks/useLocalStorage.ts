@@ -1,8 +1,7 @@
-// FIX: Import `React` to resolve the `React` namespace, which is required for the types in the function signature.
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
 
 function useLocalStorage<T,>(key: string, initialValue: T): [T, React.Dispatch<React.SetStateAction<T>>] {
-  const [storedValue, setStoredValue] = useState<T>(() => {
+  const [storedValue, setStoredValue] = React.useState<T>(() => {
     try {
       const item = window.localStorage.getItem(key);
       return item ? JSON.parse(item) : initialValue;
@@ -24,7 +23,7 @@ function useLocalStorage<T,>(key: string, initialValue: T): [T, React.Dispatch<R
   
   // This effect ensures that if the localStorage is updated in another tab,
   // the current tab's state is updated as well.
-  useEffect(() => {
+  React.useEffect(() => {
     const handleStorageChange = (e: StorageEvent) => {
       if (e.key === key && e.newValue) {
         setStoredValue(JSON.parse(e.newValue));

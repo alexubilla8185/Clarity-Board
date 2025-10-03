@@ -1,33 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Column as ColumnType, Card as CardType } from '../../types';
 import Card from './Card';
 import { PlusIcon, TrashIcon, CloseIcon } from '../ui/Icons';
+import { SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 interface ColumnProps {
   column: ColumnType;
-  columnIndex: number;
-  onAddCard: (columnIndex: number, title: string) => void;
-  onDeleteCard: (columnIndex: number, cardIndex: number) => void;
-  onDeleteColumn: () => void;
-  onUpdateColumnTitle: (columnIndex: number, newTitle: string) => void;
+  onAddCard: (columnId: string, title: string) => void;
+  onDeleteCard: (cardId: string) => void;
+  onDeleteColumn: (columnId: string) => void;
+  onUpdateColumnTitle: (columnId: string, newTitle: string) => void;
   onOpenAiModal: (card: CardType) => void;
-  onOpenEditModal: (card: CardType, columnIndex: number, cardIndex: number) => void;
-  onDragStart: (e: React.DragEvent<HTMLDivElement>, columnIndex: number, cardIndex: number) => void;
-  onDragEnter: (e: React.DragEvent<HTMLDivElement>, targetColumnIndex: number, targetCardIndex: number) => void;
-  onDrop: (e: React.DragEvent<HTMLDivElement>, targetColumnIndex: number) => void;
+  onOpenEditModal: (card: CardType) => void;
 }
 
 const Column: React.FC<ColumnProps> = ({ 
-    column, columnIndex, onAddCard, onDeleteCard, onDeleteColumn, onUpdateColumnTitle, onOpenAiModal, onOpenEditModal, onDragStart, onDragEnter, onDrop
+    column, onAddCard, onDeleteCard, onDeleteColumn, onUpdateColumnTitle, onOpenAiModal, onOpenEditModal
 }) => {
   const [newCardTitle, setNewCardTitle] = useState('');
   const [isAddingCard, setIsAddingCard] = useState(false);
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [columnTitle, setColumnTitle] = useState(column.title);
 
+  const cardIds = useMemo(() => column.cards.map(card => card.id), [column.cards]);
+
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({
+    id: column.id,
+    data: {
+      type: 'Column',
+      column,
+    },
+  });
+
+  const style = {
+    transition,
+    transform: CSS.Transform.toString(transform),
+  };
+
   const submitNewCard = () => {
     if (newCardTitle.trim()) {
-      onAddCard(columnIndex, newCardTitle.trim());
+      onAddCard(column.id, newCardTitle.trim());
       setNewCardTitle('');
       setIsAddingCard(false);
     }
@@ -40,7 +60,7 @@ const Column: React.FC<ColumnProps> = ({
 
   const handleTitleBlur = () => {
     if (columnTitle.trim() && columnTitle.trim() !== column.title) {
-      onUpdateColumnTitle(columnIndex, columnTitle.trim());
+      onUpdateColumnTitle(column.id, columnTitle.trim());
     } else {
         setColumnTitle(column.title);
     }
@@ -56,13 +76,23 @@ const Column: React.FC<ColumnProps> = ({
       }
   }
 
+  if (isDragging) {
+    return (
+      <div 
+        ref={setNodeRef}
+        style={style}
+        className="bg-outline/20 border-2 border-outline border-dashed rounded-lg w-80 flex-shrink-0 p-3 flex flex-col max-h-full"
+      />
+    );
+  }
+
   return (
     <div 
+        ref={setNodeRef}
+        style={style}
         className="bg-surface-container rounded-lg w-80 flex-shrink-0 p-3 flex flex-col max-h-full"
-        onDragOver={(e) => e.preventDefault()}
-        onDrop={(e) => onDrop(e, columnIndex)}
     >
-      <div className="flex justify-between items-center mb-4">
+      <div {...attributes} {...listeners} className="flex justify-between items-center mb-4 cursor-grab active:cursor-grabbing">
         {isEditingTitle ? (
             <input 
                 type="text"
@@ -80,26 +110,22 @@ const Column: React.FC<ColumnProps> = ({
                 </button>
             </h3>
         )}
-        <button onClick={onDeleteColumn} aria-label={`Delete column ${column.title}`} className="p-1 text-on-surface-variant hover:text-error rounded-full transition-colors flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-primary">
+        <button onClick={() => onDeleteColumn(column.id)} aria-label={`Delete column ${column.title}`} className="p-1 text-on-surface-variant hover:text-error rounded-full transition-colors flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-primary">
           <TrashIcon className="w-5 h-5" />
         </button>
       </div>
       <div className="overflow-y-auto flex-grow pr-1">
-        {column.cards.map((card, cardIndex) => (
-          <Card 
-            key={card.id} 
-            card={card} 
-            columnIndex={columnIndex} 
-            cardIndex={cardIndex} 
-            onDelete={onDeleteCard}
-            onOpenAiModal={onOpenAiModal}
-            onOpenEditModal={onOpenEditModal}
-            onDragStart={onDragStart}
-            onDragEnter={onDragEnter}
-          />
-        ))}
-        {/* Drop zone at the end of the column */}
-         <div onDragEnter={(e) => onDragEnter(e, columnIndex, column.cards.length)} className="h-2"/>
+        <SortableContext items={cardIds} strategy={verticalListSortingStrategy}>
+          {column.cards.map(card => (
+            <Card 
+              key={card.id} 
+              card={card} 
+              onDelete={onDeleteCard}
+              onOpenAiModal={onOpenAiModal}
+              onOpenEditModal={onOpenEditModal}
+            />
+          ))}
+        </SortableContext>
       </div>
       
       {isAddingCard ? (
