@@ -182,7 +182,7 @@ export const QuestionMarkCircleIcon: React.FC<IconProps> = ({ className }) => (
 
 export const ShieldCheckIcon: React.FC<IconProps> = ({ className }) => (
     <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 20.955a11.955 11.955 0 0018 0c0-1.244-.212-2.454-.618-3.618z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.611 2.39-.904 3.228a48.97 48.97 0 0 1-8.196 8.411A3.375 3.375 0 0 1 12 21.75a3.375 3.375 0 0 1-1.904-.512A48.97 48.97 0 0 1 1.904 15.228 9.001 9.001 0 0 1 12 3c3.743 0 6.963 2.083 8.448 5.034" />
     </svg>
 );
 
