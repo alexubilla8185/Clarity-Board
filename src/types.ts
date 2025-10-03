@@ -86,6 +86,6 @@ export interface SearchResult {
 export interface UserSettings {
     name: string;
     avatar: { type: 'preset' | 'custom'; value: string } | null;
-    theme: 'light' | 'dark' | 'system';
+    theme: 'light' | 'dark' | 'true-dark' | 'system';
     accentColor: string; // Stored as an RGB string e.g., "59 130 246"
 }

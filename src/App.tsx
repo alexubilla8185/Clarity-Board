@@ -81,18 +81,42 @@ function App() {
   // Effect for handling theme changes
   React.useEffect(() => {
     const root = window.document.documentElement;
-    const isDark =
-      userSettings.theme === 'dark' ||
-      (userSettings.theme === 'system' &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches);
-    root.classList.toggle('dark', isDark);
+
+    const applyCurrentTheme = () => {
+        root.classList.remove('dark', 'true-dark'); // Clear previous theme classes
+
+        let finalTheme: 'light' | 'dark' | 'true-dark' = 'light';
+
+        if (userSettings.theme === 'dark' || userSettings.theme === 'true-dark') {
+            finalTheme = userSettings.theme;
+        } else if (userSettings.theme === 'system') {
+            const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (isSystemDark) {
+                finalTheme = 'dark'; // System defaults to standard dark
+            }
+        }
+
+        if (finalTheme === 'dark') {
+            root.classList.add('dark');
+        } else if (finalTheme === 'true-dark') {
+            root.classList.add('dark'); // Add dark for base styles
+            root.classList.add('true-dark'); // Add true-dark for overrides
+        }
+    };
+
+    applyCurrentTheme();
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
     if (userSettings.theme === 'system') {
-        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        const handleChange = () => root.classList.toggle('dark', mediaQuery.matches);
-        mediaQuery.addEventListener('change', handleChange);
-        return () => mediaQuery.removeEventListener('change', handleChange);
+        mediaQuery.addEventListener('change', applyCurrentTheme);
     }
+
+    return () => {
+        if (userSettings.theme === 'system') {
+            mediaQuery.removeEventListener('change', applyCurrentTheme);
+        }
+    };
   }, [userSettings.theme]);
 
   // Effect for handling accent color changes

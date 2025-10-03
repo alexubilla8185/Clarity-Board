@@ -165,9 +165,9 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, userSett
                     <div>
                         <label className="block text-sm font-medium text-on-surface-variant mb-2">Theme</label>
                         <div className="flex items-center bg-surface-container rounded-lg p-1 w-fit">
-                            {(['Light', 'Dark', 'System'] as const).map(theme => (
-                                <button key={theme} onClick={() => setUserSettings(p => ({...p, theme: theme.toLowerCase() as UserSettings['theme']}))}
-                                className={`px-3 py-1 text-sm font-medium rounded-md capitalize focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary ${userSettings.theme === theme.toLowerCase() ? 'bg-primary text-on-primary shadow-1' : 'text-on-surface-variant'}`}>
+                            {(['Light', 'Dark', 'True Dark', 'System'] as const).map(theme => (
+                                <button key={theme} onClick={() => setUserSettings(p => ({...p, theme: theme.toLowerCase().replace(' ', '-') as UserSettings['theme']}))}
+                                className={`px-3 py-1 text-sm font-medium rounded-md capitalize focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary ${userSettings.theme === theme.toLowerCase().replace(' ', '-') ? 'bg-primary text-on-primary shadow-1' : 'text-on-surface-variant'}`}>
                                     {theme}
                                 </button>
                             ))}
