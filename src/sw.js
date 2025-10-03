@@ -1,4 +1,5 @@
-const CACHE_NAME = 'clarity-board-cache-v6';
+
+const CACHE_NAME = 'clarity-board-cache-v7';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -37,8 +38,9 @@ self.addEventListener('fetch', (event) => {
 
         return fetch(fetchRequest).then(
           (response) => {
-            // Check if we received a valid response
-            if (!response || response.status !== 200 || response.type !== 'basic') {
+            // Check if we received a valid response.
+            // We don't check for response.type, allowing opaque responses (from CDNs) to be cached.
+            if (!response || response.status !== 200) {
               return response;
             }
 
