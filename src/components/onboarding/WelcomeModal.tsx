@@ -12,16 +12,16 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ isOpen, onStartFresh, onTry
 
   return (
     <div className="fixed inset-0 bg-surface/90 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-surface-container rounded-lg shadow-3 w-full max-w-3xl text-center p-12 animate-fade-in-up">
-        <img src="/favicon.svg" alt="Clarity Board Logo" className="w-20 h-20 mx-auto mb-6" />
-        <h1 className="text-4xl font-bold text-on-surface">
+      <div className="bg-surface-container rounded-lg shadow-3 w-full max-w-3xl text-center p-6 md:p-12 animate-fade-in-up max-h-[95vh] overflow-y-auto">
+        <img src="/favicon.svg" alt="Clarity Board Logo" className="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 md:mb-6" />
+        <h1 className="text-3xl md:text-4xl font-bold text-on-surface">
           Welcome to <span className="text-primary">Clarity Board</span>
         </h1>
-        <p className="mt-3 text-lg text-on-surface-variant max-w-xl mx-auto">
+        <p className="mt-3 text-base md:text-lg text-on-surface-variant max-w-xl mx-auto">
           Your new privacy-first, offline-ready productivity hub. All your data stays on your device.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left my-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 text-left my-8 md:my-10">
           <div className="flex items-start gap-4">
             <div className="bg-primary/20 text-primary p-3 rounded-full mt-1 flex-shrink-0">
                 <SparklesIcon className="w-6 h-6" />
