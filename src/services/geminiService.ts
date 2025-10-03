@@ -17,12 +17,14 @@ const getApiKey = (): string | undefined => {
 }
 
 const apiKey = getApiKey();
+let ai: GoogleGenAI | null = null;
 
-if (!apiKey) {
-    console.warn("Gemini API key not found. AI features will be disabled.");
+if (apiKey) {
+  ai = new GoogleGenAI({ apiKey });
+} else {
+  console.warn("Gemini API key not found. AI features will be disabled.");
 }
 
-const ai = new GoogleGenAI({ apiKey: apiKey! });
 
 export interface SmartSplitTask {
     title: string;
@@ -49,7 +51,7 @@ const getPrompt = (option: AIOption, text: string): string => {
 }
 
 export const enhanceText = async (option: AIOption, text: string): Promise<string> => {
-    if (!getApiKey()) {
+    if (!ai) {
         throw new Error("API Key not configured. AI features are unavailable.");
     }
 
@@ -71,7 +73,7 @@ export const enhanceText = async (option: AIOption, text: string): Promise<strin
 };
 
 export const generateProjectFromText = async (text: string): Promise<SmartSplitResponse> => {
-    if (!getApiKey()) {
+    if (!ai) {
         throw new Error("API Key not configured. AI features are unavailable.");
     }
     
