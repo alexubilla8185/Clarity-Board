@@ -220,8 +220,8 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, userSett
                      <div className="pt-2">
                         <h3 className="font-bold text-on-surface text-base mb-1">Legal</h3>
                         <div className="flex gap-4">
-                            <a href="/public/privacy.html" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline rounded-sm focus:outline-none focus:ring-2 focus:ring-primary">Privacy Policy</a>
-                            <a href="/public/terms.html" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline rounded-sm focus:outline-none focus:ring-2 focus:ring-primary">Terms of Service</a>
+                            <a href="/privacy.html" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline rounded-sm focus:outline-none focus:ring-2 focus:ring-primary">Privacy Policy</a>
+                            <a href="/terms.html" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline rounded-sm focus:outline-none focus:ring-2 focus:ring-primary">Terms of Service</a>
                         </div>
                     </div>
                  </div>

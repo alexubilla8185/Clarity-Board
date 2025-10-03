@@ -168,7 +168,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, appData, setAppData, c
     return (
         <aside className={`fixed top-0 left-0 h-full w-64 bg-surface z-40 transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 transition-transform duration-300 ease-in-out border-r border-outline flex flex-col`}>
             <div className="p-4 flex items-center gap-3 flex-shrink-0">
-                <img src="/public/favicon.svg" alt="Clarity Board Logo" className="w-8 h-8" />
+                <img src="/favicon.svg" alt="Clarity Board Logo" className="w-8 h-8" />
                 <h1 className="text-2xl font-bold text-on-surface">
                     <span className="text-primary">Clarity</span> Board
                 </h1>

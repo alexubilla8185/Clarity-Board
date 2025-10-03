@@ -1,16 +1,16 @@
-const CACHE_NAME = 'clarity-board-cache-v4';
+const CACHE_NAME = 'clarity-board-cache-v5';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/public/manifest.json',
-  '/public/privacy.html',
-  '/public/terms.html',
-  '/public/favicon.ico',
-  '/public/favicon.svg',
-  '/public/apple-touch-icon.png',
-  '/public/favicon-96x96.png',
-  '/public/web-app-manifest-192x192.png',
-  '/public/web-app-manifest-512x512.png'
+  '/manifest.json',
+  '/privacy.html',
+  '/terms.html',
+  '/favicon.ico',
+  '/favicon.svg',
+  '/apple-touch-icon.png',
+  '/favicon-96x96.png',
+  '/web-app-manifest-192x192.png',
+  '/web-app-manifest-512x512.png'
 ];
 
 self.addEventListener('install', (event) => {
