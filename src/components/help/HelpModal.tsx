@@ -26,6 +26,21 @@ const QuickStartGuide: React.FC = () => (
 
         <div className="flex items-start gap-4">
             <div className="bg-primary/20 text-primary p-3 rounded-full mt-1 flex-shrink-0">
+                <SparklesIcon className="w-6 h-6" />
+            </div>
+            <div>
+                <h4 className="text-lg font-semibold text-on-surface">Enhance Cards with AI</h4>
+                <p>Supercharge individual tasks. Click the sparkles icon on any Kanban card to:</p>
+                <ul className="list-disc ml-6 mt-2 space-y-1">
+                    <li><strong className="text-on-surface">Brainstorm:</strong> Generate related ideas and sub-tasks.</li>
+                    <li><strong className="text-on-surface">Summarize:</strong> Condense long descriptions into key points.</li>
+                    <li><strong className="text-on-surface">Improve:</strong> Refine your writing for clarity and professionalism.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div className="flex items-start gap-4">
+            <div className="bg-primary/20 text-primary p-3 rounded-full mt-1 flex-shrink-0">
                 <SearchIcon className="w-6 h-6" />
             </div>
             <div>
