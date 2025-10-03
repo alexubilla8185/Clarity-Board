@@ -7,7 +7,7 @@ Clarity Board is a privacy-first, offline-ready, and installable Progressive Web
 ## ✨ Key Features
 
 - **Multi-Project Organization**: Manage different types of projects in one place.
-  - **Kanban Boards**: Visualize workflows with drag-and-drop columns and cards.
+  - **Kanban Boards**: Visualize workflows with drag-and-drop cards. Switch between a traditional multi-column `Board View` and a streamlined top-down `List View`.
   - **Rich Notes**: A powerful Markdown editor for your thoughts and documents.
   - **Checklists**: Simple and effective to-do lists with priority management.
 - **Categorization**: Group your projects into color-coded categories for better organization.
@@ -15,8 +15,12 @@ Clarity Board is a privacy-first, offline-ready, and installable Progressive Web
 - **AI Text Enhancement**: Summarize, brainstorm, or improve the writing in your Kanban cards.
 - **100% Private & Offline**: All data is stored locally in your browser. The app works perfectly without an internet connection.
 - **Universal Search**: Instantly find any project, note, or task with a quick search (`Ctrl/Cmd + K`).
-- **Personalization**: Customize your workspace with light/dark/system themes, accent colors, and personalized avatars.
+- **Personalization & Settings**: Fully customize your workspace via the settings panel.
+    - Set a display name and choose a custom or preset avatar.
+    - Choose from Light, Dark, True Dark, and System themes.
+    - Select from a palette of accent colors.
 - **Data Portability**: Easily export all your data to a JSON file for backup, or import a backup to restore your workspace.
+- **Modern UI/UX**: Enjoy a clean interface with toast notifications for feedback, smooth animations, and a focus on accessibility and keyboard navigation.
 
 ## 🚀 Tech Stack
 

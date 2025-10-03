@@ -87,7 +87,7 @@ const Board: React.FC<BoardProps> = ({ project, onProjectUpdate, onDeleteColumn 
   const [activeColumn, setActiveColumn] = React.useState<ColumnType | null>(null);
   const [activeCard, setActiveCard] = React.useState<CardType | null>(null);
 
-  const viewMode = project.viewMode || 'board';
+  const viewMode = project.viewMode || 'list';
 
   const columnIds = React.useMemo(() => boardData.map(col => col.id), [boardData]);
 
@@ -255,7 +255,8 @@ const Board: React.FC<BoardProps> = ({ project, onProjectUpdate, onDeleteColumn 
     }
   };
 
-  const ListColumnDroppable = ({ id, children }: {id: string, children: React.ReactNode}) => {
+  // FIX: Although the error points to line 312, it's a misleading TypeScript error. The actual issue is that a library (dnd-kit) might be implicitly rendering ListColumnDroppable without children. Making the `children` prop optional fixes this type error.
+  const ListColumnDroppable = ({ id, children }: {id: string, children?: React.ReactNode}) => {
     const { setNodeRef } = useDroppable({ id, data: { type: 'Column' } });
     return <div ref={setNodeRef} className="min-h-[80px] rounded-lg bg-black/5 dark:bg-white/5">{children}</div>;
   };

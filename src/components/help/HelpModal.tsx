@@ -17,7 +17,7 @@ const QuickStartGuide: React.FC = () => (
                 <p>Use the floating <span className="font-bold">+</span> button in the bottom right to add new items. You can choose from four types:</p>
                 <ul className="list-disc ml-6 mt-2 space-y-1">
                     <li><strong className="text-on-surface flex items-center gap-2"><SparklesIcon className="w-5 h-5"/>Smart Split:</strong> Let AI create a project from your notes.</li>
-                    <li><strong className="text-on-surface flex items-center gap-2"><ViewGridIcon className="w-5 h-5"/>Project:</strong> A Kanban board to visualize and manage complex workflows.</li>
+                    <li><strong className="text-on-surface flex items-center gap-2"><ViewGridIcon className="w-5 h-5"/>Project:</strong> A Kanban board to visualize workflows. Switch between a top-down List view and a traditional Board view.</li>
                     <li><strong className="text-on-surface flex items-center gap-2"><ClipboardCheckIcon className="w-5 h-5"/>Checklist:</strong> For simple to-do lists.</li>
                     <li><strong className="text-on-surface flex items-center gap-2"><DocumentTextIcon className="w-5 h-5"/>Note:</strong> A powerful Markdown editor for your thoughts.</li>
                 </ul>

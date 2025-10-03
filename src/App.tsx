@@ -180,7 +180,7 @@ function App() {
             case ProjectType.BOARD:
             default:
                 newData = [];
-                newProject = { ...newProjectBase, data: newData, viewMode: 'board' };
+                newProject = { ...newProjectBase, data: newData, viewMode: 'list' };
                 break;
         }
 
@@ -326,7 +326,7 @@ function App() {
             categoryId: null, // Default to uncategorized
             data: newBoardData,
             lastModified: Date.now(),
-            viewMode: 'board'
+            viewMode: 'list'
         };
         
         setAppData(prev => ({
@@ -417,14 +417,15 @@ function App() {
 
   const activeProject = currentView.type === 'project' ? appData.projects.find(p => p.id === currentView.id) : null;
 
-  const getPageTitle = (): string | undefined => {
+  const getPageTitle = (): string => {
       switch (currentView.type) {
           case 'project':
-              return activeProject?.name;
+              return activeProject?.name || 'Project';
           case 'project-list':
               return 'All Projects';
+          case 'dashboard':
           default:
-              return undefined;
+              return 'Dashboard';
       }
   }
 
@@ -463,10 +464,8 @@ function App() {
 
       <div className={`flex-1 flex flex-col transition-all duration-300 ease-in-out ${isSidebarOpen ? 'md:ml-64' : 'ml-0'}`}>
         <Header 
-          isSidebarOpen={isSidebarOpen} 
           onToggleSidebar={() => setSidebarOpen(!isSidebarOpen)}
           pageTitle={getPageTitle()}
-          isProjectView={currentView.type === 'project'}
         />
         <main className="flex-grow p-4 sm:p-6 lg:p-8 overflow-y-auto">
           {currentView.type === 'dashboard' && (

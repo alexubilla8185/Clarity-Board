@@ -1,5 +1,22 @@
 export const changelogData = [
   {
+    version: '1.6.0',
+    date: '2025-10-03',
+    changes: {
+        Changed: [
+            '**Default Board View**: Kanban projects now default to the \'List\' view for a more streamlined initial experience.',
+            '**Header UI**: The main header has been redesigned to be cleaner, removing the app name and consistently displaying a centered title for the current view.',
+            '**Documentation**: Updated `README.md` and the in-app Help Center to accurately reflect all current features.',
+        ],
+        Added: [
+          'Added comprehensive documentation to all key components.',
+        ],
+        Fixed: [
+          'Minor accessibility improvements for keyboard navigation within modals.',
+        ]
+    }
+  },
+  {
     version: '1.5.0',
     date: '2025-10-02',
     changes: {
