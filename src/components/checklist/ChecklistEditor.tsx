@@ -9,6 +9,9 @@ const PRIORITY_STYLES: { [key in Priority]: { base: string; text: string; label:
     [Priority.LOW]: { base: 'bg-blue-500/20', text: 'text-blue-400', label: 'Low' },
 };
 
+const PRIORITY_CYCLE: Priority[] = [Priority.LOW, Priority.MEDIUM, Priority.HIGH];
+
+
 interface TaskItemProps {
     item: ChecklistItem;
     onToggle: (id: string) => void;
@@ -23,18 +26,6 @@ interface TaskItemProps {
 const TaskItem: React.FC<TaskItemProps> = ({ item, onToggle, onUpdate, onDelete, onChangePriority, onDragStart, onDragEnter, index }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [editText, setEditText] = useState(item.text);
-    const [isPriorityMenuOpen, setPriorityMenuOpen] = useState(false);
-    const priorityButtonRef = useRef<HTMLDivElement>(null);
-    
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (priorityButtonRef.current && !priorityButtonRef.current.contains(event.target as Node)) {
-                setPriorityMenuOpen(false);
-            }
-        };
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, []);
 
     const handleEditBlur = () => {
         if (editText.trim() && editText.trim() !== item.text) {
@@ -53,6 +44,12 @@ const TaskItem: React.FC<TaskItemProps> = ({ item, onToggle, onUpdate, onDelete,
             setIsEditing(false);
         }
     }
+
+    const handlePriorityCycle = () => {
+        const currentIndex = PRIORITY_CYCLE.indexOf(item.priority);
+        const nextIndex = (currentIndex + 1) % PRIORITY_CYCLE.length;
+        onChangePriority(item.id, PRIORITY_CYCLE[nextIndex]);
+    };
 
     return (
         <div
@@ -90,28 +87,13 @@ const TaskItem: React.FC<TaskItemProps> = ({ item, onToggle, onUpdate, onDelete,
                 )}
             </div>
             
-            <div className="relative" ref={priorityButtonRef}>
-                <button 
-                    onClick={() => setPriorityMenuOpen(!isPriorityMenuOpen)}
-                    aria-expanded={isPriorityMenuOpen}
-                    aria-controls={`priority-menu-${item.id}`}
-                    aria-label={`Change priority for ${item.text}, current is ${item.priority}`}
-                    className={`text-xs font-bold px-2 py-1 rounded-full transition-transform group-hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-surface-container ${PRIORITY_STYLES[item.priority].base} ${PRIORITY_STYLES[item.priority].text}`}
-                >
-                    {PRIORITY_STYLES[item.priority].label}
-                </button>
-                {isPriorityMenuOpen && (
-                     <div id={`priority-menu-${item.id}`} className="absolute right-0 bottom-full mb-2 w-32 bg-surface rounded-md shadow-3 z-10 p-1 border border-outline">
-                         {Object.values(Priority).map(p => (
-                             <button key={p} onClick={() => { onChangePriority(item.id, p); setPriorityMenuOpen(false); }} 
-                                className={`w-full text-left px-2 py-1.5 text-sm rounded hover:bg-surface-container flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-primary ${PRIORITY_STYLES[p].text}`}>
-                                 <span className={`w-3 h-3 rounded-full ${PRIORITY_STYLES[p].base} border ${PRIORITY_STYLES[p].text}`}></span>
-                                 {PRIORITY_STYLES[p].label}
-                             </button>
-                         ))}
-                     </div>
-                )}
-            </div>
+            <button 
+                onClick={handlePriorityCycle}
+                aria-label={`Change priority for ${item.text}, current is ${PRIORITY_STYLES[item.priority].label}. Click to cycle priority.`}
+                className={`text-xs font-bold px-2 py-1 rounded-full transition-transform group-hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-surface-container ${PRIORITY_STYLES[item.priority].base} ${PRIORITY_STYLES[item.priority].text}`}
+            >
+                {PRIORITY_STYLES[item.priority].label}
+            </button>
 
             <button onClick={() => onDelete(item.id)} aria-label={`Delete task: ${item.text}`} className="p-1 text-on-surface-variant hover:text-error rounded-full opacity-0 group-hover:opacity-100 transition-opacity focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface-container">
                 <TrashIcon className="w-5 h-5" />

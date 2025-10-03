@@ -24,7 +24,7 @@ const Card: React.FC<CardProps> = ({ card, columnIndex, cardIndex, onDelete, onO
     }, 300); // This duration must match the transition duration in the className
   };
 
-  const baseClasses = "bg-surface-container rounded-md shadow-1 hover:shadow-2 group focus:outline-none focus:ring-2 focus:ring-primary";
+  const baseClasses = "bg-surface rounded-md shadow-1 hover:shadow-2 group focus:outline-none focus:ring-2 focus:ring-primary border border-outline/20";
   const transitionClasses = "transition-all duration-300 ease-in-out";
   const stateClasses = isDeleting
     ? "h-0 opacity-0 p-0 mb-0 overflow-hidden"

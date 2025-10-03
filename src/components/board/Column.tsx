@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Column as ColumnType, Card as CardType } from '../../types';
 import Card from './Card';
-import { PlusIcon, TrashIcon } from '../ui/Icons';
+import { PlusIcon, TrashIcon, CloseIcon } from '../ui/Icons';
 
 interface ColumnProps {
   column: ColumnType;
@@ -25,13 +25,17 @@ const Column: React.FC<ColumnProps> = ({
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [columnTitle, setColumnTitle] = useState(column.title);
 
-  const handleAddCard = (e: React.FormEvent) => {
-    e.preventDefault();
+  const submitNewCard = () => {
     if (newCardTitle.trim()) {
       onAddCard(columnIndex, newCardTitle.trim());
       setNewCardTitle('');
       setIsAddingCard(false);
     }
+  };
+
+  const handleAddCard = (e: React.FormEvent) => {
+    e.preventDefault();
+    submitNewCard();
   };
 
   const handleTitleBlur = () => {
@@ -103,12 +107,32 @@ const Column: React.FC<ColumnProps> = ({
           <textarea
             value={newCardTitle}
             onChange={(e) => setNewCardTitle(e.target.value)}
-            placeholder="Enter card title..."
+            placeholder="Enter a title for this card..."
             className="w-full p-2 rounded-md bg-surface text-on-surface border border-outline focus:outline-none focus:ring-2 focus:ring-primary"
             autoFocus
-            onBlur={() => setIsAddingCard(false)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                submitNewCard();
+              }
+            }}
           />
-          <button type="submit" className="hidden">Add</button>
+          <div className="mt-2 flex items-center gap-2">
+            <button
+              type="submit"
+              className="bg-primary hover:bg-primary/90 text-on-primary font-semibold py-1.5 px-3 rounded-sm text-sm transition-colors"
+            >
+              Add card
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsAddingCard(false)}
+              aria-label="Cancel adding card"
+              className="p-1.5 rounded-full text-on-surface-variant hover:bg-outline/10"
+            >
+              <CloseIcon className="w-5 h-5" />
+            </button>
+          </div>
         </form>
       ) : (
         <button 
