@@ -1,0 +1,24 @@
+
+{
+  "short_name": "Clarity",
+  "name": "Clarity Board",
+  "icons": [
+    {
+      "src": "https://img.icons8.com/fluency/192/ffffff/task.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://img.icons8.com/fluency/512/ffffff/task.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#1f2937",
+  "background_color": "#111827",
+  "description": "A privacy-first, offline-ready productivity board."
+}

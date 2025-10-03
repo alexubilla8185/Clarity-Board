@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy | Clarity Board</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        --color-primary: 59 130 246;
+        --color-on-primary: 255 255 255;
+        --color-surface: 250 250 250;
+        --color-surface-container: 239 243 244;
+        --color-on-surface: 28 27 31;
+        --color-on-surface-variant: 68 69 78;
+      }
+      .dark {
+        --color-primary: 96 165 250;
+        --color-on-primary: 0 0 0;
+        --color-surface: 18 18 18;
+        --color-surface-container: 33 35 41;
+        --color-on-surface: 228 225 229;
+        --color-on-surface-variant: 198 196 208;
+      }
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: 'rgb(var(--color-primary) / <alpha-value>)',
+              'on-primary': 'rgb(var(--color-on-primary) / <alpha-value>)',
+              surface: 'rgb(var(--color-surface) / <alpha-value>)',
+              'surface-container': 'rgb(var(--color-surface-container) / <alpha-value>)',
+              'on-surface': 'rgb(var(--color-on-surface) / <alpha-value>)',
+              'on-surface-variant': 'rgb(var(--color-on-surface-variant) / <alpha-value>)',
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+          }
+        }
+      }
+    </script>
+  </head>
+  <body class="bg-surface text-on-surface font-sans">
+    <div class="max-w-4xl mx-auto p-8 prose">
+      <h1 class="text-3xl font-bold text-on-surface">Privacy Policy</h1>
+      <p class="text-on-surface-variant">Last Updated: October 2, 2025</p>
+
+      <h2 class="text-2xl font-bold text-on-surface mt-8">1. Introduction</h2>
+      <p class="text-on-surface-variant">Welcome to Clarity Board. We are committed to protecting your privacy. This Privacy Policy explains how we handle your information when you use our application. By using Clarity Board, you agree to the collection and use of information in accordance with this policy.</p>
+
+      <h2 class="text-2xl font-bold text-on-surface mt-8">2. Data Storage</h2>
+      <p class="text-on-surface-variant">Clarity Board is a privacy-first application. All data you create, including projects, notes, checklists, categories, and settings, is stored exclusively on your local device within your web browser's storage (IndexedDB). Your data is never sent to, or stored on, any external servers controlled by us.</p>
+
+      <h2 class="text-2xl font-bold text-on-surface mt-8">3. AI Features</h2>
+      <p class="text-on-surface-variant">Our application offers optional AI features powered by the Google Gemini API. When you choose to use an AI feature (such as "Smart Split" or "Enhance Text"), only the specific text you provide for that feature is sent to the Google Gemini API for processing. We do not send any other personal data or project information. Your use of these features is subject to Google's Privacy Policy and Terms of Service.</p>
+
+      <h2 class="text-2xl font-bold text-on-surface mt-8">4. Data Export and Import</h2>
+      <p class="text-on-surface-variant">You have the option to export all your application data as a local JSON file for backup purposes. Similarly, you can import a previously exported backup file to restore your data. This process is entirely managed by you on your local device.</p>
+
+      <h2 class="text-2xl font-bold text-on-surface mt-8">5. No Tracking or Analytics</h2>
+      <p class="text-on-surface-variant">We do not use any tracking cookies, analytics services, or other mechanisms to monitor your usage of the application. We do not collect any personal information, IP addresses, or device information.</p>
+
+      <h2 class="text-2xl font-bold text-on-surface mt-8">6. Changes to This Privacy Policy</h2>
+      <p class="text-on-surface-variant">We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.</p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,5 @@
+{
+  "name": "Clarity Board",
+  "description": "A privacy-first, offline-ready, and installable PWA for managing your tasks and projects. All your data stays on your device. Enhance your workflow with optional AI features.",
+  "requestFramePermissions": []
+}
