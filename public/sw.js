@@ -1,11 +1,11 @@
-const CACHE_NAME = 'clarity-board-cache-v1';
+const CACHE_NAME = 'clarity-board-cache-v2';
 const urlsToCache = [
   '/',
   '/index.html',
   '/manifest.json',
   '/privacy.html',
   '/terms.html',
-  '/src/index.tsx',
+  '/index.tsx',
   '/favicon.ico',
   '/favicon.svg',
   '/apple-touch-icon.png',
