@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import * as React from 'react';
 import { UserSettings, AppData } from '../../types';
 import Modal from '../ui/Modal';
 import { ACCENT_COLORS } from '../../constants';
@@ -33,12 +33,12 @@ const TabButton: React.FC<{ active: boolean; onClick: () => void; children: Reac
 );
 
 const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, userSettings, setUserSettings, onClearAllData, onInitiateDataImport, onExportData }) => {
-    const [activeTab, setActiveTab] = useState<'profile' | 'appearance' | 'data' | 'about'>('profile');
-    const [name, setName] = useState(userSettings.name);
-    const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
-    const [deleteConfirmation, setDeleteConfirmation] = useState('');
-    const fileInputRef = useRef<HTMLInputElement>(null);
-    const avatarInputRef = useRef<HTMLInputElement>(null);
+    const [activeTab, setActiveTab] = React.useState<'profile' | 'appearance' | 'data' | 'about'>('profile');
+    const [name, setName] = React.useState(userSettings.name);
+    const [isDeleteModalOpen, setDeleteModalOpen] = React.useState(false);
+    const [deleteConfirmation, setDeleteConfirmation] = React.useState('');
+    const fileInputRef = React.useRef<HTMLInputElement>(null);
+    const avatarInputRef = React.useRef<HTMLInputElement>(null);
     const { showToast } = useToast();
 
 

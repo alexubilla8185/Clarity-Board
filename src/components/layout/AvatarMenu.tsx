@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import * as React from 'react';
 import { SettingsIcon, ArrowLeftOnRectangleIcon } from '../ui/Icons';
 
 interface AvatarMenuProps {
@@ -8,9 +8,9 @@ interface AvatarMenuProps {
 }
 
 const AvatarMenu: React.FC<AvatarMenuProps> = ({ onClose, onOpenSettings, onLogOut }) => {
-    const menuRef = useRef<HTMLDivElement>(null);
+    const menuRef = React.useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
+    React.useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
                 onClose();

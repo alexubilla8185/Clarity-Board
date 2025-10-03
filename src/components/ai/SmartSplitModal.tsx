@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import * as React from 'react';
 import Modal from '../ui/Modal';
 import { SparklesIcon } from '../ui/Icons';
 import { useToast } from '../../contexts/ToastContext';
@@ -10,8 +10,8 @@ interface SmartSplitModalProps {
 }
 
 const SmartSplitModal: React.FC<SmartSplitModalProps> = ({ isOpen, onClose, onSubmit }) => {
-  const [text, setText] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [text, setText] = React.useState('');
+  const [isLoading, setIsLoading] = React.useState(false);
   const { showToast } = useToast();
 
   const handleSubmit = async () => {

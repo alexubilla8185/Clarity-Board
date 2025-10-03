@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
 import Board from './components/board/Board';
 import Header from './components/layout/Header';
 import Sidebar from './components/layout/Sidebar';
@@ -27,18 +27,18 @@ function App() {
   const [hasOnboarded, setHasOnboarded] = useLocalStorage<boolean>('clarity-has-onboarded', false);
   const [lastBackupDate, setLastBackupDate] = useLocalStorage<number | null>('clarity-last-backup', null);
 
-  const [isSidebarOpen, setSidebarOpen] = useState(window.innerWidth > 768);
-  const [currentView, setCurrentView] = useState<CurrentView>({ type: 'dashboard', id: null });
+  const [isSidebarOpen, setSidebarOpen] = React.useState(window.innerWidth > 768);
+  const [currentView, setCurrentView] = React.useState<CurrentView>({ type: 'dashboard', id: null });
   
   // Modal states
-  const [isWelcomeModalOpen, setWelcomeModalOpen] = useState(false);
-  const [isSmartSplitModalOpen, setIsSmartSplitModalOpen] = useState(false);
-  const [isSearchModalOpen, setSearchModalOpen] = useState(false);
-  const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
-  const [isHelpModalOpen, setHelpModalOpen] = useState(false);
-  const [isLogOutModalOpen, setLogOutModalOpen] = useState(false);
+  const [isWelcomeModalOpen, setWelcomeModalOpen] = React.useState(false);
+  const [isSmartSplitModalOpen, setIsSmartSplitModalOpen] = React.useState(false);
+  const [isSearchModalOpen, setSearchModalOpen] = React.useState(false);
+  const [isSettingsModalOpen, setIsSettingsModalOpen] = React.useState(false);
+  const [isHelpModalOpen, setHelpModalOpen] = React.useState(false);
+  const [isLogOutModalOpen, setLogOutModalOpen] = React.useState(false);
 
-  const [confirmationState, setConfirmationState] = useState<{
+  const [confirmationState, setConfirmationState] = React.useState<{
     isOpen: boolean;
     title: string;
     message: string;
@@ -51,7 +51,7 @@ function App() {
     message: '',
     onConfirm: null,
   });
-  const [createModalState, setCreateModalState] = useState<{
+  const [createModalState, setCreateModalState] = React.useState<{
     isOpen: boolean;
     context: {
         type: 'project' | 'category';
@@ -61,13 +61,13 @@ function App() {
   }>({ isOpen: false, context: null });
   const { showToast } = useToast();
   
-  useEffect(() => {
+  React.useEffect(() => {
     if (!hasOnboarded) {
         setWelcomeModalOpen(true);
     }
   }, [hasOnboarded]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
         if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
             e.preventDefault();
@@ -79,7 +79,7 @@ function App() {
   }, []);
 
   // Effect for handling theme changes
-  useEffect(() => {
+  React.useEffect(() => {
     const root = window.document.documentElement;
     const isDark =
       userSettings.theme === 'dark' ||
@@ -96,7 +96,7 @@ function App() {
   }, [userSettings.theme]);
 
   // Effect for handling accent color changes
-  useEffect(() => {
+  React.useEffect(() => {
       document.documentElement.style.setProperty('--color-primary', userSettings.accentColor);
   }, [userSettings.accentColor]);
 
@@ -134,26 +134,32 @@ function App() {
 
     if (type === 'project' && projectType) {
         let newData: BoardData | NoteData | ChecklistData;
-        switch (projectType) {
-            case ProjectType.NOTE:
-                newData = { content: `# ${name}\n\nStart writing here.` };
-                break;
-            case ProjectType.CHECKLIST:
-                newData = [];
-                break;
-            case ProjectType.BOARD:
-            default:
-                newData = [];
-                break;
-        }
-        const newProject: Project = {
+        const newProjectBase = {
             id: crypto.randomUUID(),
             name,
             type: projectType,
             categoryId: categoryId !== undefined ? categoryId : null,
-            data: newData,
             lastModified: Date.now()
         };
+        
+        let newProject: Project;
+
+        switch (projectType) {
+            case ProjectType.NOTE:
+                newData = { content: `# ${name}\n\nStart writing here.` };
+                newProject = { ...newProjectBase, data: newData };
+                break;
+            case ProjectType.CHECKLIST:
+                newData = [];
+                newProject = { ...newProjectBase, data: newData };
+                break;
+            case ProjectType.BOARD:
+            default:
+                newData = [];
+                newProject = { ...newProjectBase, data: newData, viewMode: 'board' };
+                break;
+        }
+
         setAppData(prev => ({
             ...prev,
             projects: [...prev.projects, newProject]
@@ -174,11 +180,11 @@ function App() {
   };
 
 
-  const updateProject = (projectId: string, updatedData: any) => {
+  const updateProject = (projectId: string, updates: Partial<Project>) => {
     setAppData(prev => ({
         ...prev,
         projects: prev.projects.map(p => 
-            p.id === projectId ? { ...p, data: updatedData, lastModified: Date.now() } : p
+            p.id === projectId ? { ...p, ...updates, lastModified: Date.now() } : p
         )
     }));
   };
@@ -295,7 +301,8 @@ function App() {
             type: ProjectType.BOARD,
             categoryId: null, // Default to uncategorized
             data: newBoardData,
-            lastModified: Date.now()
+            lastModified: Date.now(),
+            viewMode: 'board'
         };
         
         setAppData(prev => ({
@@ -397,6 +404,12 @@ function App() {
       }
   }
 
+  const handleProjectUpdate = (updates: Partial<Project>) => {
+    if (activeProject) {
+        updateProject(activeProject.id, updates);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-surface text-on-surface font-sans flex">
       <Sidebar 
@@ -450,8 +463,8 @@ function App() {
           {currentView.type === 'project' && activeProject?.type === ProjectType.BOARD && (
             <Board 
               key={activeProject.id}
-              initialBoardData={activeProject.data as BoardData}
-              onBoardUpdate={(updatedData) => updateProject(activeProject.id, updatedData)}
+              project={activeProject}
+              onProjectUpdate={handleProjectUpdate}
               onDeleteColumn={(columnId) => handleDeleteColumn(activeProject.id, columnId)}
             />
           )}
@@ -459,14 +472,14 @@ function App() {
             <NoteEditor 
               key={activeProject.id}
               initialNoteData={activeProject.data as NoteData}
-              onNoteUpdate={(updatedData) => updateProject(activeProject.id, updatedData)}
+              onNoteUpdate={(updatedData) => updateProject(activeProject.id, { data: updatedData })}
             />
           )}
           {currentView.type === 'project' && activeProject?.type === ProjectType.CHECKLIST && (
             <ChecklistEditor
               key={activeProject.id}
               initialChecklistData={activeProject.data as ChecklistData}
-              onChecklistUpdate={(updatedData) => updateProject(activeProject.id, updatedData)}
+              onChecklistUpdate={(updatedData) => updateProject(activeProject.id, { data: updatedData })}
             />
           )}
         </main>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import * as React from 'react';
 import { AppData, Category, ProjectType, UserSettings, CurrentView } from '../../types';
 import { HomeIcon, PlusIcon, DotsHorizontalIcon, EditIcon, TrashIcon, ChevronDownIcon, ProjectIcon, QuestionMarkCircleIcon } from '../ui/Icons';
 import Avatar from '../ui/Avatar';
@@ -41,10 +41,10 @@ const CategoryItem: React.FC<{
     onDeleteProject: SidebarProps['onDeleteProject'],
     onDeleteCategory: (categoryId: string) => void;
 }> = ({ category, projects, setAppData, setCurrentView, currentView, onAddProject, onDeleteProject, onDeleteCategory }) => {
-    const [isEditing, setIsEditing] = useState(false);
-    const [name, setName] = useState(category.name);
-    const [isMenuOpen, setMenuOpen] = useState(false);
-    const [isExpanded, setExpanded] = useState(true);
+    const [isEditing, setIsEditing] = React.useState(false);
+    const [name, setName] = React.useState(category.name);
+    const [isMenuOpen, setMenuOpen] = React.useState(false);
+    const [isExpanded, setExpanded] = React.useState(true);
 
     const categoryProjects = projects.filter(p => p.categoryId === (category.id === 'null' ? null : category.id));
 
@@ -163,7 +163,7 @@ const CategoryItem: React.FC<{
 const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, appData, setAppData, currentView, setCurrentView, onAddProject, onAddCategory, onDeleteProject, onDeleteCategory, userSettings, onOpenSettings, onOpenHelp, onLogOut }) => {
     
     const uncategorizedProjects = appData.projects.filter(p => p.categoryId === null);
-    const [isAvatarMenuOpen, setAvatarMenuOpen] = useState(false);
+    const [isAvatarMenuOpen, setAvatarMenuOpen] = React.useState(false);
 
     return (
         <aside className={`fixed top-0 left-0 h-full w-64 bg-surface z-40 transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 transition-transform duration-300 ease-in-out border-r border-outline flex flex-col`}>

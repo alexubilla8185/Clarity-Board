@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import * as React from 'react';
 import { NoteData } from '../../types';
 import { parseMarkdown } from '../../utils/markdown';
 import FormattingToolbar from './FormattingToolbar';
@@ -10,19 +10,19 @@ interface NoteEditorProps {
 }
 
 const NoteEditor: React.FC<NoteEditorProps> = ({ initialNoteData, onNoteUpdate }) => {
-    const [content, setContent] = useState(initialNoteData.content);
-    const [viewMode, setViewMode] = useState<'edit' | 'preview'>('edit');
-    const textareaRef = useRef<HTMLTextAreaElement>(null);
+    const [content, setContent] = React.useState(initialNoteData.content);
+    const [viewMode, setViewMode] = React.useState<'edit' | 'preview'>('edit');
+    const textareaRef = React.useRef<HTMLTextAreaElement>(null);
 
     const debouncedContent = useDebounce(content, 500);
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (debouncedContent !== initialNoteData.content) {
             onNoteUpdate({ content: debouncedContent });
         }
     }, [debouncedContent]);
     
-    useEffect(() => {
+    React.useEffect(() => {
         setContent(initialNoteData.content);
     }, [initialNoteData.content]);
     

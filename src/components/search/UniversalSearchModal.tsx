@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import * as React from 'react';
 import { AppData, SearchResult, ProjectType } from '../../types';
 import { useDebounce } from '../../hooks/useDebounce';
 import { performSearch } from '../../utils/search';
@@ -22,13 +22,13 @@ const ProjectTypeIcon: React.FC<{ type: ProjectType }> = ({ type }) => {
 }
 
 const UniversalSearchModal: React.FC<UniversalSearchModalProps> = ({ isOpen, onClose, appData, onSelectResult }) => {
-  const [query, setQuery] = useState('');
-  const [results, setResults] = useState<SearchResult[]>([]);
-  const [activeIndex, setActiveIndex] = useState(-1);
+  const [query, setQuery] = React.useState('');
+  const [results, setResults] = React.useState<SearchResult[]>([]);
+  const [activeIndex, setActiveIndex] = React.useState(-1);
   const debouncedQuery = useDebounce(query, 200);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = React.useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (isOpen) {
       inputRef.current?.focus();
       setQuery('');
@@ -36,7 +36,7 @@ const UniversalSearchModal: React.FC<UniversalSearchModalProps> = ({ isOpen, onC
     }
   }, [isOpen]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (debouncedQuery) {
       const searchResults = performSearch(debouncedQuery, appData);
       setResults(searchResults);
@@ -46,7 +46,7 @@ const UniversalSearchModal: React.FC<UniversalSearchModalProps> = ({ isOpen, onC
     }
   }, [debouncedQuery, appData]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!isOpen || results.length === 0) return;
 

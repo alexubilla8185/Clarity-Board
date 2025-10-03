@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import * as React from 'react';
 import { Column as ColumnType, Card as CardType } from '../../types';
 import Card from './Card';
 import { PlusIcon, TrashIcon, CloseIcon } from '../ui/Icons';
@@ -18,12 +18,12 @@ interface ColumnProps {
 const Column: React.FC<ColumnProps> = ({ 
     column, onAddCard, onDeleteCard, onDeleteColumn, onUpdateColumnTitle, onOpenAiModal, onOpenEditModal
 }) => {
-  const [newCardTitle, setNewCardTitle] = useState('');
-  const [isAddingCard, setIsAddingCard] = useState(false);
-  const [isEditingTitle, setIsEditingTitle] = useState(false);
-  const [columnTitle, setColumnTitle] = useState(column.title);
+  const [newCardTitle, setNewCardTitle] = React.useState('');
+  const [isAddingCard, setIsAddingCard] = React.useState(false);
+  const [isEditingTitle, setIsEditingTitle] = React.useState(false);
+  const [columnTitle, setColumnTitle] = React.useState(column.title);
 
-  const cardIds = useMemo(() => column.cards.map(card => card.id), [column.cards]);
+  const cardIds = React.useMemo(() => column.cards.map(card => card.id), [column.cards]);
 
   const {
     attributes,

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
 import { useFocusTrap } from '../../hooks/useFocusTrap';
 import { XMarkIcon, SparklesIcon, ViewGridIcon, ShieldCheckIcon, PlusIcon, DocumentTextIcon, ClipboardCheckIcon, SearchIcon } from '../ui/Icons';
 import { changelogData } from '../../constants/changelog';
@@ -99,10 +99,10 @@ interface HelpModalProps {
 }
 
 const HelpModal: React.FC<HelpModalProps> = ({ isOpen, onClose }) => {
-    const [activeTab, setActiveTab] = useState('guide');
+    const [activeTab, setActiveTab] = React.useState('guide');
     const trapRef = useFocusTrap<HTMLDivElement>(isOpen);
 
-    useEffect(() => {
+    React.useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
             if (e.key === 'Escape') {
                 onClose();

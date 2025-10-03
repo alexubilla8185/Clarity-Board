@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import * as React from 'react';
 import { ChecklistData, ChecklistItem, Priority } from '../../types';
 import { useDebounce } from '../../hooks/useDebounce';
 import { PlusIcon, TrashIcon, DotsHorizontalIcon } from '../ui/Icons';
@@ -24,8 +24,8 @@ interface TaskItemProps {
 }
 
 const TaskItem: React.FC<TaskItemProps> = ({ item, onToggle, onUpdate, onDelete, onChangePriority, onDragStart, onDragEnter, index }) => {
-    const [isEditing, setIsEditing] = useState(false);
-    const [editText, setEditText] = useState(item.text);
+    const [isEditing, setIsEditing] = React.useState(false);
+    const [editText, setEditText] = React.useState(item.text);
 
     const handleEditBlur = () => {
         if (editText.trim() && editText.trim() !== item.text) {
@@ -109,18 +109,18 @@ interface ChecklistEditorProps {
 }
 
 const ChecklistEditor: React.FC<ChecklistEditorProps> = ({ initialChecklistData, onChecklistUpdate }) => {
-    const [items, setItems] = useState<ChecklistItem[]>(initialChecklistData);
-    const [newItemText, setNewItemText] = useState('');
+    const [items, setItems] = React.useState<ChecklistItem[]>(initialChecklistData);
+    const [newItemText, setNewItemText] = React.useState('');
     
     const debouncedItems = useDebounce(items, 500);
-    const dragItem = useRef<number | null>(null);
-    const dragOverItem = useRef<number | null>(null);
+    const dragItem = React.useRef<number | null>(null);
+    const dragOverItem = React.useRef<number | null>(null);
 
-    useEffect(() => {
+    React.useEffect(() => {
         onChecklistUpdate(debouncedItems);
     }, [debouncedItems]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         setItems(initialChecklistData);
     }, [initialChecklistData]);
     

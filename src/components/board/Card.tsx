@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import * as React from 'react';
 import { Card as CardType } from '../../types';
 import { TrashIcon, SparklesIcon, EditIcon } from '../ui/Icons';
 import { useSortable } from '@dnd-kit/sortable';
@@ -12,7 +12,7 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ card, onDelete, onOpenAiModal, onOpenEditModal }) => {
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [isDeleting, setIsDeleting] = React.useState(false);
 
   const {
     attributes,

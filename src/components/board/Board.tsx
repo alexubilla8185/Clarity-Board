@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { BoardData, Card as CardType, Column as ColumnType } from '../../types';
+import * as React from 'react';
+import { BoardData, Card as CardType, Column as ColumnType, Project } from '../../types';
 import Column from './Column';
 import AIFeatureModal from './AIFeatureModal';
 import Modal from '../ui/Modal';
-import { PlusIcon } from '../ui/Icons';
-import { DndContext, DragEndEvent, DragOverEvent, DragStartEvent, DragOverlay, PointerSensor, KeyboardSensor, useSensor, useSensors } from '@dnd-kit/core';
-import { SortableContext, arrayMove, horizontalListSortingStrategy } from '@dnd-kit/sortable';
+import { PlusIcon, ViewGridIcon, Bars3Icon } from '../ui/Icons';
+import { DndContext, DragEndEvent, DragOverEvent, DragStartEvent, DragOverlay, PointerSensor, KeyboardSensor, useSensor, useSensors, useDroppable } from '@dnd-kit/core';
+import { SortableContext, arrayMove, horizontalListSortingStrategy, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { createPortal } from 'react-dom';
 import Card from './Card';
 
@@ -17,8 +17,8 @@ interface EditCardFormProps {
 }
 
 const EditCardForm: React.FC<EditCardFormProps> = ({ card, onSave, onCancel }) => {
-    const [title, setTitle] = useState(card.title);
-    const [description, setDescription] = useState(card.description);
+    const [title, setTitle] = React.useState(card.title);
+    const [description, setDescription] = React.useState(card.description);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -61,33 +61,35 @@ const EditCardForm: React.FC<EditCardFormProps> = ({ card, onSave, onCancel }) =
 };
 
 interface BoardProps {
-    initialBoardData: BoardData;
-    onBoardUpdate: (newData: BoardData) => void;
+    project: Project;
+    onProjectUpdate: (updates: Partial<Project>) => void;
     onDeleteColumn: (columnId: string) => void;
 }
 
-const Board: React.FC<BoardProps> = ({ initialBoardData, onBoardUpdate, onDeleteColumn }) => {
-  const [boardData, setBoardData] = useState<BoardData>(initialBoardData);
+const Board: React.FC<BoardProps> = ({ project, onProjectUpdate, onDeleteColumn }) => {
+  const [boardData, setBoardData] = React.useState<BoardData>(project.data as BoardData);
 
-  useEffect(() => {
-    setBoardData(initialBoardData);
-  }, [initialBoardData]);
+  React.useEffect(() => {
+    setBoardData(project.data as BoardData);
+  }, [project.data]);
 
-  useEffect(() => {
-    if (JSON.stringify(boardData) !== JSON.stringify(initialBoardData)) {
-      onBoardUpdate(boardData);
+  React.useEffect(() => {
+    if (JSON.stringify(boardData) !== JSON.stringify(project.data)) {
+      onProjectUpdate({ data: boardData });
     }
-  }, [boardData, initialBoardData, onBoardUpdate]);
+  }, [boardData, project.data, onProjectUpdate]);
 
-  const [isAiModalOpen, setIsAiModalOpen] = useState(false);
-  const [selectedCard, setSelectedCard] = useState<CardType | null>(null);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [editingCardInfo, setEditingCardInfo] = useState<{ card: CardType } | null>(null);
+  const [isAiModalOpen, setIsAiModalOpen] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState<CardType | null>(null);
+  const [isEditModalOpen, setIsEditModalOpen] = React.useState(false);
+  const [editingCardInfo, setEditingCardInfo] = React.useState<{ card: CardType } | null>(null);
 
-  const [activeColumn, setActiveColumn] = useState<ColumnType | null>(null);
-  const [activeCard, setActiveCard] = useState<CardType | null>(null);
+  const [activeColumn, setActiveColumn] = React.useState<ColumnType | null>(null);
+  const [activeCard, setActiveCard] = React.useState<CardType | null>(null);
 
-  const columnIds = useMemo(() => boardData.map(col => col.id), [boardData]);
+  const viewMode = project.viewMode || 'board';
+
+  const columnIds = React.useMemo(() => boardData.map(col => col.id), [boardData]);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -109,6 +111,53 @@ const Board: React.FC<BoardProps> = ({ initialBoardData, onBoardUpdate, onDelete
       return;
     }
   };
+  
+   const handleDragOver = (event: DragOverEvent) => {
+    const { active, over } = event;
+    if (!over) return;
+
+    const activeId = active.id;
+    const overId = over.id;
+
+    if (activeId === overId) return;
+
+    const isActiveACard = active.data.current?.type === "Card";
+    if (!isActiveACard) return;
+
+    const isOverACard = over.data.current?.type === "Card";
+    const isOverAColumn = over.data.current?.type === "Column";
+
+    setBoardData((board) => {
+      const activeColumn = board.find((col) => col.cards.some((card) => card.id === activeId));
+      let overColumn = null;
+
+      if (isOverACard) {
+        overColumn = board.find((col) => col.cards.some((card) => card.id === overId));
+      } else if (isOverAColumn) {
+        overColumn = board.find((col) => col.id === overId);
+      }
+
+      if (!activeColumn || !overColumn || activeColumn.id === overColumn.id) {
+        return board;
+      }
+      
+      const activeCardIndex = activeColumn.cards.findIndex((card) => card.id === activeId);
+      const [movedCard] = activeColumn.cards.splice(activeCardIndex, 1);
+      
+      if(isOverACard){
+         const overCardIndex = overColumn.cards.findIndex((card) => card.id === overId);
+         overColumn.cards.splice(overCardIndex, 0, movedCard);
+      } else {
+         overColumn.cards.push(movedCard);
+      }
+
+      return board.map(col => {
+          if (col.id === activeColumn.id) return {...col, cards: [...activeColumn.cards]};
+          if (col.id === overColumn.id) return {...col, cards: [...overColumn.cards]};
+          return col;
+      });
+    });
+  };
 
   const handleDragEnd = (event: DragEndEvent) => {
     setActiveColumn(null);
@@ -118,7 +167,7 @@ const Board: React.FC<BoardProps> = ({ initialBoardData, onBoardUpdate, onDelete
     if (!over || active.id === over.id) return;
 
     // Handle Column dragging
-    if (active.data.current?.type === 'Column') {
+    if (active.data.current?.type === 'Column' && viewMode === 'board') {
         setBoardData(columns => {
             const oldIndex = columns.findIndex(c => c.id === active.id);
             const newIndex = columns.findIndex(c => c.id === over.id);
@@ -127,42 +176,22 @@ const Board: React.FC<BoardProps> = ({ initialBoardData, onBoardUpdate, onDelete
         return;
     }
 
-    // Handle Card dragging
+    // Handle Card dragging within the same column
     if (active.data.current?.type === 'Card') {
         setBoardData(prevData => {
             const activeColumn = prevData.find(col => col.cards.some(card => card.id === active.id));
+            if (!activeColumn) return prevData;
+            
             const overColumn = prevData.find(col => col.cards.some(card => card.id === over.id) || col.id === over.id);
 
-            if (!activeColumn || !overColumn) {
-                return prevData;
-            }
-            
-            const activeCardIndex = activeColumn.cards.findIndex(card => card.id === active.id);
-            let overCardIndex = overColumn.cards.findIndex(card => card.id === over.id);
-
-            // If dropping on a column, not a card
-            if (over.data.current?.type === 'Column') {
-                overCardIndex = overColumn.cards.length;
-            }
-
-            let newData = [...prevData];
-
-            if (activeColumn.id === overColumn.id) {
-                // Same column
+            if (activeColumn && overColumn && activeColumn.id === overColumn.id) {
+                const activeCardIndex = activeColumn.cards.findIndex(card => card.id === active.id);
+                const overCardIndex = overColumn.cards.findIndex(card => card.id === over.id);
                 const newCards = arrayMove(activeColumn.cards, activeCardIndex, overCardIndex);
-                newData = newData.map(col => col.id === activeColumn.id ? {...col, cards: newCards} : col);
-            } else {
-                // Different columns
-                const [movedCard] = activeColumn.cards.splice(activeCardIndex, 1);
-                overColumn.cards.splice(overCardIndex, 0, movedCard);
-
-                newData = newData.map(col => {
-                    if (col.id === activeColumn.id) return {...col, cards: [...activeColumn.cards]};
-                    if (col.id === overColumn.id) return {...col, cards: [...overColumn.cards]};
-                    return col;
-                });
+                return prevData.map(col => col.id === activeColumn.id ? {...col, cards: newCards} : col);
             }
-            return newData;
+            // Note: Dragging between columns is handled by onDragOver for a better UX
+            return prevData;
         });
     }
   };
@@ -226,28 +255,82 @@ const Board: React.FC<BoardProps> = ({ initialBoardData, onBoardUpdate, onDelete
     }
   };
 
+  const ListColumnDroppable = ({ id, children }: {id: string, children: React.ReactNode}) => {
+    const { setNodeRef } = useDroppable({ id, data: { type: 'Column' } });
+    return <div ref={setNodeRef} className="min-h-[80px] rounded-lg bg-black/5 dark:bg-white/5">{children}</div>;
+  };
+
   return (
     <>
-      <DndContext sensors={sensors} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-        <div className="flex items-start gap-6 overflow-x-auto pb-6">
-          <SortableContext items={columnIds} strategy={horizontalListSortingStrategy}>
-            {boardData.map((col) => (
-              <Column
-                key={col.id}
-                column={col}
-                onAddCard={addCard}
-                onDeleteCard={deleteCard}
-                onDeleteColumn={() => onDeleteColumn(col.id)}
-                onUpdateColumnTitle={updateColumnTitle}
-                onOpenAiModal={handleOpenAiModal}
-                onOpenEditModal={handleOpenEditModal}
-              />
-            ))}
-          </SortableContext>
-          <button onClick={addColumn} className="bg-surface-container hover:bg-outline/20 transition-colors text-on-surface-variant font-medium rounded-lg w-80 flex-shrink-0 p-3 flex items-center justify-center h-20">
-            <PlusIcon className="w-6 h-6 mr-2" /> Add another column
-          </button>
-        </div>
+      <div className="flex justify-end mb-4">
+          <div className="flex items-center bg-surface-container rounded-lg p-1">
+              <button
+                  onClick={() => onProjectUpdate({ viewMode: 'board' })}
+                  className={`flex items-center gap-2 px-3 py-1 text-sm font-medium rounded-md transition-colors ${viewMode === 'board' ? 'bg-primary text-on-primary shadow-1' : 'text-on-surface-variant'}`}
+                  aria-pressed={viewMode === 'board'}
+              >
+                  <ViewGridIcon className="w-5 h-5" />
+                  Board
+              </button>
+              <button
+                  onClick={() => onProjectUpdate({ viewMode: 'list' })}
+                  className={`flex items-center gap-2 px-3 py-1 text-sm font-medium rounded-md transition-colors ${viewMode === 'list' ? 'bg-primary text-on-primary shadow-1' : 'text-on-surface-variant'}`}
+                  aria-pressed={viewMode === 'list'}
+              >
+                  <Bars3Icon className="w-5 h-5" />
+                  List
+              </button>
+          </div>
+      </div>
+
+      <DndContext sensors={sensors} onDragStart={handleDragStart} onDragOver={handleDragOver} onDragEnd={handleDragEnd}>
+        {viewMode === 'board' ? (
+            <div className="flex items-start gap-6 overflow-x-auto pb-6">
+            <SortableContext items={columnIds} strategy={horizontalListSortingStrategy}>
+                {boardData.map((col) => (
+                <Column
+                    key={col.id}
+                    column={col}
+                    onAddCard={addCard}
+                    onDeleteCard={deleteCard}
+                    onDeleteColumn={() => onDeleteColumn(col.id)}
+                    onUpdateColumnTitle={updateColumnTitle}
+                    onOpenAiModal={handleOpenAiModal}
+                    onOpenEditModal={handleOpenEditModal}
+                />
+                ))}
+            </SortableContext>
+            <button onClick={addColumn} className="bg-surface-container hover:bg-outline/20 transition-colors text-on-surface-variant font-medium rounded-lg w-80 flex-shrink-0 p-3 flex items-center justify-center h-20">
+                <PlusIcon className="w-6 h-6 mr-2" /> Add another column
+            </button>
+            </div>
+        ) : (
+            <div className="space-y-8 max-w-4xl mx-auto">
+                {boardData.map(column => (
+                    <section key={column.id} aria-labelledby={`list-column-title-${column.id}`}>
+                        <h2 id={`list-column-title-${column.id}`} className="font-semibold text-xl text-on-surface mb-3 px-1">{column.title}</h2>
+                        <ListColumnDroppable id={column.id}>
+                            <SortableContext items={column.cards.map(c => c.id)} strategy={verticalListSortingStrategy}>
+                                <div className="space-y-3 p-2">
+                                    {column.cards.map(card => (
+                                        <Card 
+                                            key={card.id} 
+                                            card={card} 
+                                            onDelete={deleteCard}
+                                            onOpenAiModal={handleOpenAiModal}
+                                            onOpenEditModal={handleOpenEditModal}
+                                        />
+                                    ))}
+                                </div>
+                            </SortableContext>
+                        </ListColumnDroppable>
+                    </section>
+                ))}
+                 <button onClick={addColumn} className="w-full bg-surface-container hover:bg-outline/20 transition-colors text-on-surface-variant font-medium rounded-lg p-3 flex items-center justify-center h-20">
+                    <PlusIcon className="w-6 h-6 mr-2" /> Add another section
+                </button>
+            </div>
+        )}
 
         {createPortal(
             <DragOverlay>
@@ -300,9 +383,9 @@ const Board: React.FC<BoardProps> = ({ initialBoardData, onBoardUpdate, onDelete
       {boardData.length === 0 && (
           <div className="text-center py-20">
               <h2 className="text-2xl font-semibold text-on-surface">This project is empty.</h2>
-              <p className="text-on-surface-variant mt-2">Get started by adding a column.</p>
+              <p className="text-on-surface-variant mt-2">Get started by adding a column or section.</p>
               <button onClick={addColumn} className="mt-6 bg-primary hover:bg-primary/90 text-on-primary font-bold py-2 px-6 rounded-lg transition-colors">
-                Add a Column
+                Add Section
               </button>
           </div>
       )}

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { AppData, BoardData, ProjectType, ChecklistData, NoteData, Project } from '../../types';
 import { SparklesIcon, PresentationChartLineIcon, ClockIcon, FolderIcon, ClipboardCheckIcon, ViewGridIcon, ProjectIcon } from '../ui/Icons';
 import { formatDistanceToNow } from 'date-fns';

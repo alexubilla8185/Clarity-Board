@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { ToastMessage } from '../../contexts/ToastContext';
 import Toast from './Toast';
 

@@ -60,6 +60,7 @@ export interface Project {
   categoryId: string | null; // null for uncategorized
   data: BoardData | NoteData | ChecklistData; // Can now be either board, note or checklist data
   lastModified: number;
+  viewMode?: 'board' | 'list'; // For Kanban projects to remember the selected view
 }
 
 export interface AppData {

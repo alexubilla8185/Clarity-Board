@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import * as React from 'react';
 import { PlusIcon, ViewGridIcon, DocumentTextIcon, ClipboardCheckIcon, SparklesIcon } from './Icons';
 import { ProjectType } from '../../types';
 
@@ -8,7 +8,7 @@ interface FloatingActionButtonProps {
 }
 
 const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({ onAddProject, onOpenSmartSplitModal }) => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = React.useState(false);
 
     const actions = [
         { label: 'Note', icon: <DocumentTextIcon className="w-6 h-6" />, type: ProjectType.NOTE, disabled: false },

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
 import { CheckCircleIcon, ExclamationCircleIcon, InformationCircleIcon, CloseIcon } from './Icons';
 import { ToastType } from '../../contexts/ToastContext';
 
@@ -26,9 +26,9 @@ const TOAST_CONFIG = {
 const TOAST_DURATION = 4000;
 
 const Toast: React.FC<ToastProps> = ({ message, type, onDismiss }) => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = React.useState(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
     // Animate in
     setIsVisible(true);
 

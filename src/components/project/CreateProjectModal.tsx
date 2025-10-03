@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
 import Modal from '../ui/Modal';
 
 interface CreateProjectModalProps {
@@ -10,9 +10,9 @@ interface CreateProjectModalProps {
 }
 
 const CreateProjectModal: React.FC<CreateProjectModalProps> = ({ isOpen, onClose, onSubmit, title, label }) => {
-  const [name, setName] = useState('');
+  const [name, setName] = React.useState('');
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (isOpen) {
       setName('');
     }

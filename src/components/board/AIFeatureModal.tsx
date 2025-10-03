@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
 import { Card, AIOption } from '../../types';
 import { enhanceText } from '../../services/geminiService';
 import Modal from '../ui/Modal';
@@ -21,12 +21,12 @@ const loadingMessages = [
 ];
 
 const AIFeatureModal: React.FC<AIFeatureModalProps> = ({ isOpen, onClose, card, onUpdateCard }) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [aiResult, setAiResult] = useState('');
-  const [error, setError] = useState('');
-  const [loadingMessage, setLoadingMessage] = useState(loadingMessages[0]);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [aiResult, setAiResult] = React.useState('');
+  const [error, setError] = React.useState('');
+  const [loadingMessage, setLoadingMessage] = React.useState(loadingMessages[0]);
   
-  useEffect(() => {
+  React.useEffect(() => {
     if (isLoading) {
       const interval = setInterval(() => {
         setLoadingMessage(prev => loadingMessages[(loadingMessages.indexOf(prev) + 1) % loadingMessages.length]);
@@ -60,7 +60,7 @@ const AIFeatureModal: React.FC<AIFeatureModalProps> = ({ isOpen, onClose, card, 
   };
   
   // Reset state when modal closes
-  useEffect(() => {
+  React.useEffect(() => {
     if (!isOpen) {
       setIsLoading(false);
       setAiResult('');

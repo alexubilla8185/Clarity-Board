@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { AppData } from '../../types';
 import { ProjectIcon } from '../ui/Icons';
 import { formatDistanceToNow } from 'date-fns';

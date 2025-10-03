@@ -1,9 +1,9 @@
-import { useEffect, useRef } from 'react';
+import * as React from 'react';
 
 export function useFocusTrap<T extends HTMLElement>(isOpen: boolean) {
-    const trapRef = useRef<T>(null);
+    const trapRef = React.useRef<T>(null);
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (!isOpen || !trapRef.current) return;
 
         const trapElement = trapRef.current;

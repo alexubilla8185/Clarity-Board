@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 interface FormattingToolbarProps {
   onApplyFormat: (format: 'bold' | 'italic' | 'h1' | 'h2' | 'h3' | 'ul' | 'ol') => void;
