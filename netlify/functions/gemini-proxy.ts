@@ -61,7 +61,7 @@ const handler: Handler = async (event: HandlerEvent) => {
         return { statusCode: 405, body: JSON.stringify({ error: 'Method Not Allowed' }) };
     }
 
-    const apiKey = process.env.API_KEY;
+    const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
         console.error('GEMINI_API_KEY is not set in Netlify environment variables.');
         return { statusCode: 500, body: JSON.stringify({ error: 'The AI service is not configured on the server.' }) };

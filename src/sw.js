@@ -1,4 +1,4 @@
-const CACHE_NAME = 'clarity-board-cache-v3';
+const CACHE_NAME = 'clarity-board-cache-v4';
 const urlsToCache = [
   '/',
   '/index.html',
