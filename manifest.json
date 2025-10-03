@@ -4,13 +4,13 @@
   "name": "Clarity Board",
   "icons": [
     {
-      "src": "https://img.icons8.com/fluency/192/ffffff/task.png",
+      "src": "/web-app-manifest-192x192.png",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "any maskable"
     },
     {
-      "src": "https://img.icons8.com/fluency/512/ffffff/task.png",
+      "src": "/web-app-manifest-512x512.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "any maskable"
