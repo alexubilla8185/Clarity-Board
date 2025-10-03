@@ -2,7 +2,7 @@ const CACHE_NAME = 'clarity-board-cache-v1';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/site.webmanifest',
+  '/manifest.json',
   '/privacy.html',
   '/terms.html',
   '/src/index.tsx',
