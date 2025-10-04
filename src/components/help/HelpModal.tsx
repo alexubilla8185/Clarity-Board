@@ -45,7 +45,7 @@ const QuickStartGuide: React.FC = () => (
             </div>
             <div>
                 <h4 className="title-large text-on-surface">Universal Search</h4>
-                <p className="body-medium">Quickly find anything across all your projects. Press <code className="bg-outline/20 text-on-surface px-1.5 py-0.5 rounded text-sm">Ctrl</code> + <code className="bg-outline/20 text-on-surface px-1.5 py-0.5 rounded text-sm">K</code> (or <code className="bg-outline/20 text-on-surface px-1.5 py-0.5 rounded text-sm">Cmd</code> + <code className="bg-outline/20 text-on-surface px-1.5 py-0.5 rounded text-sm">K</code> on Mac) to open the search bar.</p>
+                <p className="body-medium">Quickly find anything across all your projects. Press <code className="bg-outline/20 text-on-surface px-2 py-1 rounded-sm label-small">Ctrl</code> + <code className="bg-outline/20 text-on-surface px-2 py-1 rounded-sm label-small">K</code> (or <code className="bg-outline/20 text-on-surface px-2 py-1 rounded-sm label-small">Cmd</code> + <code className="bg-outline/20 text-on-surface px-2 py-1 rounded-sm label-small">K</code> on Mac) to open the search bar.</p>
             </div>
         </div>
 
@@ -72,7 +72,7 @@ const Changelog: React.FC = () => (
                 <div className="space-y-4">
                     {Object.entries(release.changes).map(([type, changes]) => (
                         <div key={type}>
-                            <h4 className={`label-large px-2 py-0.5 rounded-sm inline-block
+                            <h4 className={`label-large px-2 py-1 rounded-sm inline-block
                                 ${type === 'Added' ? 'bg-success/20 text-success' : ''}
                                 ${type === 'Changed' ? 'bg-primary/20 text-primary' : ''}
                                 ${type === 'Fixed' ? 'bg-error/20 text-error' : ''}
@@ -81,7 +81,7 @@ const Changelog: React.FC = () => (
                                 {changes.map((change, index) => {
                                     const formattedChange = change
                                         .replace(/\*\*(.*?)\*\*/g, '<strong class="text-on-surface">$1</strong>')
-                                        .replace(/`([^`]+)`/g, '<code class="bg-outline/20 text-on-surface px-1 py-0.5 rounded text-sm">$&</code>');
+                                        .replace(/`([^`]+)`/g, '<code class="bg-outline/20 text-on-surface px-2 py-1 rounded-sm label-small">$&</code>');
                                     return <li key={index} dangerouslySetInnerHTML={{ __html: formattedChange }} />;
                                 })}
                             </ul>

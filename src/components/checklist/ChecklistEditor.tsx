@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ChecklistData, ChecklistItem, Priority } from '../../types';
 import { useDebounce } from '../../hooks/useDebounce';
 import { PlusIcon, TrashIcon, DotsHorizontalIcon } from '../ui/Icons';
+import Input from '../ui/Input';
 
 const PRIORITY_STYLES: { [key in Priority]: { base: string; text: string; label: string } } = {
     [Priority.HIGH]: { base: 'bg-error/20', text: 'text-error', label: 'High' },
@@ -170,8 +171,8 @@ const ChecklistEditor: React.FC<ChecklistEditorProps> = ({ initialChecklistData,
                     <span className="text-on-surface-variant label-medium">Progress</span>
                     <span className="text-on-surface label-medium">{progress}%</span>
                 </div>
-                <div className="w-full bg-surface-container rounded-full h-2.5">
-                    <div className="bg-primary h-2.5 rounded-full transition-all duration-300" style={{width: `${progress}%`}}></div>
+                <div className="w-full bg-surface-container rounded-full h-2">
+                    <div className="bg-primary h-2 rounded-full transition-all duration-300" style={{width: `${progress}%`}}></div>
                 </div>
             </div>
 
@@ -198,14 +199,16 @@ const ChecklistEditor: React.FC<ChecklistEditorProps> = ({ initialChecklistData,
 
             {/* Add Item Form */}
             <form onSubmit={handleAddItem} className="mt-4 flex gap-3">
-                <input
-                    type="text"
-                    value={newItemText}
-                    onChange={(e) => setNewItemText(e.target.value)}
-                    placeholder="Add a new task..."
-                    className="w-full p-3 rounded-lg bg-surface-container text-on-surface border border-transparent focus:outline-none focus:ring-2 focus:ring-primary body-large"
-                />
-                <button type="submit" aria-label="Add new task" className="bg-primary text-on-primary rounded-lg px-6 flex items-center justify-center hover:bg-primary/90 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-surface label-large">
+                <div className="flex-grow">
+                    <Input
+                        label="Add a new task..."
+                        type="text"
+                        value={newItemText}
+                        onChange={(e) => setNewItemText(e.target.value)}
+                        className="bg-surface-container"
+                    />
+                </div>
+                <button type="submit" aria-label="Add new task" className="bg-primary text-on-primary rounded-full w-12 h-12 flex-shrink-0 flex items-center justify-center hover:shadow-1 transition-all focus:outline-none focus:ring-4 focus:ring-primary/30">
                     <PlusIcon className="w-6 h-6" />
                 </button>
             </form>

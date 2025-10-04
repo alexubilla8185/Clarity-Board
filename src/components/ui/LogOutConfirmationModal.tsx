@@ -36,21 +36,21 @@ const LogOutConfirmationModal: React.FC<LogOutConfirmationModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="border border-outline hover:bg-outline/20 text-on-surface py-2 px-4 rounded-sm transition-colors order-last sm:order-first label-large"
+            className="h-10 px-6 rounded-full transition-all border border-outline text-on-surface hover:bg-outline/10 focus:outline-none focus:ring-4 focus:ring-primary/30 order-last sm:order-first label-large"
           >
             Cancel
           </button>
            <button
             type="button"
             onClick={onExportAndLogOut}
-            className="bg-primary/20 border border-primary/30 text-primary py-2 px-4 rounded-sm transition-colors hover:bg-primary/30 label-large"
+            className="h-10 px-6 rounded-full transition-all bg-primary/20 text-primary hover:bg-primary/30 focus:outline-none focus:ring-4 focus:ring-primary/30 label-large"
           >
             Export First & Log Out
           </button>
           <button
             type="button"
             onClick={onLogOutAnyway}
-            className="bg-error hover:brightness-90 text-on-primary py-2 px-4 rounded-sm transition-colors label-large"
+            className="h-10 px-6 rounded-full transition-all bg-error hover:brightness-90 text-on-error focus:outline-none focus:ring-4 focus:ring-on-error/50 label-large"
           >
             Log Out Anyway
           </button>

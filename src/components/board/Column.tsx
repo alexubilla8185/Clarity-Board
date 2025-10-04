@@ -4,6 +4,7 @@ import Card from './Card';
 import { PlusIcon, TrashIcon, CloseIcon } from '../ui/Icons';
 import { SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import Textarea from '../ui/Textarea';
 
 interface ColumnProps {
   column: ColumnType;
@@ -130,11 +131,10 @@ const Column: React.FC<ColumnProps> = ({
       
       {isAddingCard ? (
         <form onSubmit={handleAddCard} className="mt-2">
-          <textarea
+          <Textarea
+            label="Enter a title for this card..."
             value={newCardTitle}
             onChange={(e) => setNewCardTitle(e.target.value)}
-            placeholder="Enter a title for this card..."
-            className="w-full p-2 rounded-md bg-surface text-on-surface border border-outline focus:outline-none focus:ring-2 focus:ring-primary body-large"
             autoFocus
             onKeyDown={(e) => {
               if (e.key === 'Enter' && !e.shiftKey) {
@@ -146,7 +146,7 @@ const Column: React.FC<ColumnProps> = ({
           <div className="mt-2 flex items-center gap-2">
             <button
               type="submit"
-              className="bg-primary hover:bg-primary/90 text-on-primary py-1.5 px-3 rounded-sm transition-colors label-large"
+              className="h-10 px-6 rounded-full transition-all bg-primary text-on-primary hover:shadow-1 focus:outline-none focus:ring-4 focus:ring-primary/30 label-large"
             >
               Add card
             </button>
@@ -154,7 +154,7 @@ const Column: React.FC<ColumnProps> = ({
               type="button"
               onClick={() => setIsAddingCard(false)}
               aria-label="Cancel adding card"
-              className="p-1.5 rounded-full text-on-surface-variant hover:bg-outline/10"
+              className="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-outline/10"
             >
               <CloseIcon className="w-5 h-5" />
             </button>
@@ -163,7 +163,7 @@ const Column: React.FC<ColumnProps> = ({
       ) : (
         <button 
           onClick={() => setIsAddingCard(true)}
-          className="mt-2 w-full text-left p-2 rounded-md text-on-surface-variant hover:bg-outline/10 hover:text-on-surface transition-colors flex items-center focus:outline-none focus:ring-2 focus:ring-primary label-large"
+          className="mt-2 w-full text-left p-2 rounded-lg text-on-surface-variant hover:bg-outline/10 hover:text-on-surface transition-colors flex items-center focus:outline-none focus:ring-2 focus:ring-primary label-large"
         >
           <PlusIcon className="w-5 h-5 mr-2" /> Add a card
         </button>

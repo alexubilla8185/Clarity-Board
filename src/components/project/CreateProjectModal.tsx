@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Modal from '../ui/Modal';
+import Input from '../ui/Input';
 
 interface CreateProjectModalProps {
   isOpen: boolean;
@@ -29,13 +30,13 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({ isOpen, onClose
     <Modal isOpen={isOpen} onClose={onClose} title={title}>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="item-name" className="block mb-1 text-on-surface-variant label-large">{label}</label>
-          <input
+          <Input
             id="item-name"
+            label={label}
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full p-2 rounded-sm bg-surface-container text-on-surface border border-outline focus:outline-none focus:ring-2 focus:ring-primary body-large"
+            className="bg-surface-container"
             autoFocus
           />
         </div>
@@ -43,14 +44,14 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({ isOpen, onClose
           <button
             type="button"
             onClick={onClose}
-            className="bg-surface-container hover:bg-outline/20 text-on-surface py-2 px-4 rounded-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-surface label-large"
+            className="h-10 px-6 rounded-full transition-all border border-outline text-on-surface hover:bg-outline/10 focus:outline-none focus:ring-4 focus:ring-primary/30 label-large"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={!name.trim()}
-            className="bg-primary hover:bg-primary/90 text-on-primary py-2 px-4 rounded-sm transition-colors disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-surface label-large"
+            className="h-10 px-6 rounded-full transition-all bg-primary text-on-primary hover:shadow-1 focus:outline-none focus:ring-4 focus:ring-primary/30 disabled:opacity-50 label-large"
           >
             Create
           </button>

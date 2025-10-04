@@ -8,6 +8,8 @@ import { DndContext, DragEndEvent, DragOverEvent, DragStartEvent, DragOverlay, P
 import { SortableContext, arrayMove, horizontalListSortingStrategy, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { createPortal } from 'react-dom';
 import Card from './Card';
+import Input from '../ui/Input';
+import Textarea from '../ui/Textarea';
 
 // Helper component for editing a card
 interface EditCardFormProps {
@@ -29,30 +31,24 @@ const EditCardForm: React.FC<EditCardFormProps> = ({ card, onSave, onCancel }) =
 
     return (
         <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-                <label className="block mb-1 text-on-surface-variant label-large">Title</label>
-                <input
-                    type="text"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    className="w-full p-2 rounded-sm bg-surface text-on-surface border border-outline focus:outline-none focus:ring-2 focus:ring-primary body-large"
-                    autoFocus
-                />
-            </div>
-            <div>
-                <label className="block mb-1 text-on-surface-variant label-large">Description</label>
-                <textarea
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    rows={4}
-                    className="w-full p-2 rounded-sm bg-surface text-on-surface border border-outline focus:outline-none focus:ring-2 focus:ring-primary body-large"
-                />
-            </div>
+            <Input
+                label="Title"
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                autoFocus
+            />
+            <Textarea
+                label="Description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                rows={4}
+            />
             <div className="flex justify-end gap-3 pt-2">
-                <button type="button" onClick={onCancel} className="bg-surface-container hover:bg-outline/20 text-on-surface py-2 px-4 rounded-sm transition-colors label-large">
+                <button type="button" onClick={onCancel} className="h-10 px-6 rounded-full transition-all border border-outline text-on-surface hover:bg-outline/10 focus:outline-none focus:ring-4 focus:ring-primary/30 label-large">
                     Cancel
                 </button>
-                <button type="submit" className="bg-primary hover:bg-primary/90 text-on-primary py-2 px-4 rounded-sm transition-colors label-large">
+                <button type="submit" className="h-10 px-6 rounded-full transition-all bg-primary text-on-primary hover:shadow-1 focus:outline-none focus:ring-4 focus:ring-primary/30 label-large">
                     Save Changes
                 </button>
             </div>
@@ -263,10 +259,10 @@ const Board: React.FC<BoardProps> = ({ project, onProjectUpdate, onDeleteColumn 
   return (
     <>
       <div className="flex justify-end mb-4">
-          <div className="flex items-center bg-surface-container rounded-lg p-1">
+          <div className="flex items-center bg-surface-container rounded-full p-1">
               <button
                   onClick={() => onProjectUpdate({ viewMode: 'board' })}
-                  className={`flex items-center gap-2 px-3 py-1 rounded-md transition-colors label-large ${viewMode === 'board' ? 'bg-primary text-on-primary shadow-1' : 'text-on-surface-variant'}`}
+                  className={`h-8 flex items-center gap-2 px-3 rounded-full transition-colors label-large ${viewMode === 'board' ? 'bg-primary text-on-primary shadow-1' : 'text-on-surface-variant'}`}
                   aria-pressed={viewMode === 'board'}
               >
                   <ViewGridIcon className="w-5 h-5" />
@@ -274,7 +270,7 @@ const Board: React.FC<BoardProps> = ({ project, onProjectUpdate, onDeleteColumn 
               </button>
               <button
                   onClick={() => onProjectUpdate({ viewMode: 'list' })}
-                  className={`flex items-center gap-2 px-3 py-1 rounded-md transition-colors label-large ${viewMode === 'list' ? 'bg-primary text-on-primary shadow-1' : 'text-on-surface-variant'}`}
+                  className={`h-8 flex items-center gap-2 px-3 rounded-full transition-colors label-large ${viewMode === 'list' ? 'bg-primary text-on-primary shadow-1' : 'text-on-surface-variant'}`}
                   aria-pressed={viewMode === 'list'}
               >
                   <Bars3Icon className="w-5 h-5" />
@@ -300,8 +296,8 @@ const Board: React.FC<BoardProps> = ({ project, onProjectUpdate, onDeleteColumn 
                 />
                 ))}
             </SortableContext>
-            <button onClick={addColumn} className="bg-surface-container hover:bg-outline/20 transition-colors text-on-surface-variant rounded-lg w-80 flex-shrink-0 p-3 flex items-center justify-center h-20 label-large">
-                <PlusIcon className="w-6 h-6 mr-2" /> Add another column
+            <button onClick={addColumn} className="bg-surface-container hover:bg-outline/10 h-10 transition-colors text-on-surface-variant rounded-lg w-80 flex-shrink-0 p-3 flex items-center justify-center label-large">
+                <PlusIcon className="w-5 h-5 mr-2" /> Add another column
             </button>
             </div>
         ) : (
@@ -326,8 +322,8 @@ const Board: React.FC<BoardProps> = ({ project, onProjectUpdate, onDeleteColumn 
                         </ListColumnDroppable>
                     </section>
                 ))}
-                 <button onClick={addColumn} className="w-full bg-surface-container hover:bg-outline/20 transition-colors text-on-surface-variant rounded-lg p-3 flex items-center justify-center h-20 label-large">
-                    <PlusIcon className="w-6 h-6 mr-2" /> Add another section
+                 <button onClick={addColumn} className="w-full bg-surface-container hover:bg-outline/10 h-10 transition-colors text-on-surface-variant rounded-lg p-3 flex items-center justify-center label-large">
+                    <PlusIcon className="w-5 h-5 mr-2" /> Add another section
                 </button>
             </div>
         )}
@@ -384,7 +380,7 @@ const Board: React.FC<BoardProps> = ({ project, onProjectUpdate, onDeleteColumn 
           <div className="text-center py-20">
               <h2 className="headline-small text-on-surface">This project is empty.</h2>
               <p className="text-on-surface-variant mt-2 body-large">Get started by adding a column or section.</p>
-              <button onClick={addColumn} className="mt-6 bg-primary hover:bg-primary/90 text-on-primary py-2 px-6 rounded-lg transition-colors label-large">
+              <button onClick={addColumn} className="mt-6 bg-primary hover:shadow-1 text-on-primary h-10 px-6 rounded-full transition-all label-large">
                 Add Section
               </button>
           </div>

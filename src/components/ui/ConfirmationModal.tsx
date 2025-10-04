@@ -36,7 +36,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="border border-outline hover:bg-outline/20 text-on-surface py-2 px-4 rounded-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-surface label-large"
+            className="h-10 px-6 rounded-full transition-all border border-outline text-on-surface hover:bg-outline/10 focus:outline-none focus:ring-4 focus:ring-primary/30 label-large"
           >
             Cancel
           </button>
@@ -45,7 +45,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
             onClick={onConfirm}
             className={`${
               confirmButtonClass || defaultButtonClass
-            } py-2 px-4 rounded-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-on-error focus:ring-offset-surface label-large`}
+            } h-10 px-6 rounded-full transition-all focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-offset-surface focus:ring-on-error/50 label-large`}
           >
             {confirmText}
           </button>

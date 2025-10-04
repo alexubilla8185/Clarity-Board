@@ -40,8 +40,8 @@ const ProjectSummaryCard: React.FC<{ project: Project; categoryName: string; onS
                             <span className="font-medium text-on-surface-variant label-small">Progress</span>
                             <span className="font-bold text-on-surface label-small">{progress}%</span>
                         </div>
-                        <div className="w-full bg-outline/20 rounded-full h-1.5">
-                            <div className="bg-primary h-1.5 rounded-full" style={{ width: `${progress}%` }}></div>
+                        <div className="w-full bg-outline/20 rounded-full h-2">
+                            <div className="bg-primary h-2 rounded-full" style={{ width: `${progress}%` }}></div>
                         </div>
                         <p className="text-on-surface-variant mt-2 truncate body-small">{statusSummary}</p>
                     </div>
@@ -59,8 +59,8 @@ const ProjectSummaryCard: React.FC<{ project: Project; categoryName: string; onS
                             <span className="font-medium text-on-surface-variant label-small">{completedItems}/{totalItems} Completed</span>
                             <span className="font-bold text-on-surface label-small">{progress}%</span>
                         </div>
-                        <div className="w-full bg-outline/20 rounded-full h-1.5">
-                            <div className="bg-primary h-1.5 rounded-full" style={{ width: `${progress}%` }}></div>
+                        <div className="w-full bg-outline/20 rounded-full h-2">
+                            <div className="bg-primary h-2 rounded-full" style={{ width: `${progress}%` }}></div>
                         </div>
                     </div>
                 );
@@ -150,7 +150,7 @@ const Dashboard: React.FC<DashboardProps> = ({ appData, onOpenSmartSplitModal, o
                 </div>
                 <button 
                     onClick={onOpenSmartSplitModal}
-                    className="bg-primary text-on-primary py-3 px-6 rounded-lg whitespace-nowrap hover:bg-primary/90 transition-colors label-large"
+                    className="bg-primary text-on-primary h-10 px-6 rounded-full whitespace-nowrap hover:shadow-1 transition-all focus:outline-none focus:ring-4 focus:ring-primary/30 label-large"
                 >
                     Try It Now
                 </button>

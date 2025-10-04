@@ -6,6 +6,7 @@ import Avatar from '../ui/Avatar';
 import { DownloadIcon, UploadIcon, ExternalLinkIcon } from '../ui/Icons';
 import { PRESET_AVATAR_COMPONENTS, PRESET_AVATAR_KEYS } from '../ui/PresetAvatars';
 import { useToast } from '../../contexts/ToastContext';
+import Input from '../ui/Input';
 
 interface SettingsModalProps {
     isOpen: boolean;
@@ -120,15 +121,14 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, userSett
             {activeTab === 'profile' && (
                 <div id="panel-profile" role="tabpanel" tabIndex={0} aria-labelledby="tab-profile" className="space-y-6 focus:outline-none">
                     <div>
-                        <label htmlFor="display-name" className="block mb-1 text-on-surface-variant label-large">Display Name</label>
-                        <input
+                        <Input
                             id="display-name"
+                            label="Display Name"
                             type="text"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             onBlur={handleNameBlur}
                             onKeyDown={(e) => e.key === 'Enter' && (e.target as HTMLInputElement).blur()}
-                            className="w-full p-2 rounded-sm bg-surface-container text-on-surface border border-outline focus:outline-none focus:ring-2 focus:ring-primary body-large"
                         />
                     </div>
                     <div>
@@ -136,11 +136,11 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, userSett
                         <div className="flex items-center gap-4">
                             <Avatar userSettings={userSettings} size="lg" />
                             <div className="flex flex-col gap-2">
-                                <button onClick={() => avatarInputRef.current?.click()} className="bg-surface-container hover:bg-outline/20 text-on-surface py-2 px-4 rounded-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-surface label-large">
+                                <button onClick={() => avatarInputRef.current?.click()} className="h-10 px-6 rounded-full transition-all border border-outline text-on-surface hover:bg-outline/10 focus:outline-none focus:ring-4 focus:ring-primary/30 label-large">
                                     Upload Photo
                                 </button>
                                 <input type="file" accept="image/*" ref={avatarInputRef} onChange={handleAvatarUpload} className="hidden" />
-                                <button onClick={() => setUserSettings(p => ({...p, avatar: null}))} className="text-on-surface-variant hover:text-error transition-colors rounded-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-surface label-large">
+                                <button onClick={() => setUserSettings(p => ({...p, avatar: null}))} className="h-10 px-6 rounded-full text-error hover:bg-error/10 transition-colors focus:outline-none focus:ring-4 focus:ring-primary/30 label-large">
                                     Remove Photo
                                 </button>
                             </div>
@@ -164,10 +164,10 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, userSett
                  <div id="panel-appearance" role="tabpanel" tabIndex={0} aria-labelledby="tab-appearance" className="space-y-6 focus:outline-none">
                     <div>
                         <label className="block mb-2 text-on-surface-variant label-large">Theme</label>
-                        <div className="flex items-center bg-surface-container rounded-lg p-1 w-fit">
+                        <div className="flex items-center bg-surface-container rounded-full p-1 w-fit">
                             {(['Light', 'Dark', 'True Dark', 'System'] as const).map(theme => (
                                 <button key={theme} onClick={() => setUserSettings(p => ({...p, theme: theme.toLowerCase().replace(' ', '-') as UserSettings['theme']}))}
-                                className={`px-3 py-1 rounded-md capitalize focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary label-large ${userSettings.theme === theme.toLowerCase().replace(' ', '-') ? 'bg-primary text-on-primary shadow-1' : 'text-on-surface-variant'}`}>
+                                className={`h-8 px-3 rounded-full capitalize focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary label-large ${userSettings.theme === theme.toLowerCase().replace(' ', '-') ? 'bg-primary text-on-primary shadow-1' : 'text-on-surface-variant'}`}>
                                     {theme}
                                 </button>
                             ))}
@@ -190,10 +190,10 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, userSett
                  <div id="panel-data" role="tabpanel" tabIndex={0} aria-labelledby="tab-data" className="space-y-6 focus:outline-none">
                      <p className="text-on-surface-variant body-medium">Manage your app data. Backups include all projects, categories, and settings.</p>
                      <div className="flex gap-4">
-                         <button onClick={onExportData} className="flex-1 flex items-center justify-center gap-2 bg-surface-container hover:bg-outline/20 text-on-surface py-2 px-4 rounded-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-surface label-large">
+                         <button onClick={onExportData} className="h-10 px-4 rounded-full flex-1 flex items-center justify-center gap-2 border border-outline text-on-surface hover:bg-outline/10 focus:outline-none focus:ring-4 focus:ring-primary/30 label-large">
                              <DownloadIcon className="w-5 h-5" /> Export to JSON
                          </button>
-                         <button onClick={() => fileInputRef.current?.click()} className="flex-1 flex items-center justify-center gap-2 bg-surface-container hover:bg-outline/20 text-on-surface py-2 px-4 rounded-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-surface label-large">
+                         <button onClick={() => fileInputRef.current?.click()} className="h-10 px-4 rounded-full flex-1 flex items-center justify-center gap-2 border border-outline text-on-surface hover:bg-outline/10 focus:outline-none focus:ring-4 focus:ring-primary/30 label-large">
                             <UploadIcon className="w-5 h-5" /> Import from JSON
                          </button>
                          <input type="file" accept=".json" ref={fileInputRef} onChange={handleImport} className="hidden" />
@@ -202,7 +202,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, userSett
                      <div className="p-4 rounded-lg border-2 border-dashed border-error bg-error/10 text-on-error">
                          <h3 className="text-error title-large">Danger Zone</h3>
                          <p className="mt-1 mb-4 body-medium">This action cannot be undone. All your projects, categories, and settings will be permanently deleted.</p>
-                         <button onClick={() => setDeleteModalOpen(true)} className="bg-error hover:brightness-90 text-on-error py-2 px-4 rounded-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-on-error label-large">
+                         <button onClick={() => setDeleteModalOpen(true)} className="h-10 px-6 rounded-full bg-error hover:brightness-90 text-on-error transition-colors focus:outline-none focus:ring-4 focus:ring-on-error/50 label-large">
                              Clear All Data
                          </button>
                      </div>
@@ -231,16 +231,17 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, userSett
         <Modal isOpen={isDeleteModalOpen} onClose={() => setDeleteModalOpen(false)} title="Are you absolutely sure?">
             <div className="space-y-4">
                 <p className="text-on-surface-variant body-large">This action is irreversible. To confirm, please type <strong className="text-on-surface">DELETE</strong> below.</p>
-                <input
+                <Input
+                    label="Type DELETE to confirm"
                     type="text"
                     value={deleteConfirmation}
                     onChange={(e) => setDeleteConfirmation(e.target.value)}
-                    className="w-full p-2 rounded-sm bg-surface-container text-on-surface border border-outline focus:outline-none focus:ring-2 focus:ring-error body-large"
+                    className="border-error focus:border-error"
                 />
                  <button 
                     onClick={handleDeleteConfirm} 
                     disabled={deleteConfirmation !== 'DELETE'}
-                    className="w-full bg-error text-on-error py-2 px-4 rounded-sm transition-colors disabled:bg-error/50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-on-error label-large">
+                    className="w-full h-10 px-6 rounded-full bg-error text-on-error transition-colors disabled:bg-error/50 disabled:cursor-not-allowed focus:outline-none focus:ring-4 focus:ring-on-error/50 label-large">
                      I understand the consequences, delete everything
                  </button>
             </div>

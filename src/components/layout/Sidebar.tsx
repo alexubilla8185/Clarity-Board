@@ -115,8 +115,8 @@ const CategoryItem: React.FC<{
                      )}
                     {isMenuOpen && (
                         <div id={`category-menu-${category.id}`} className="absolute right-0 mt-2 w-48 bg-surface rounded-md shadow-3 z-10 p-2 border border-outline">
-                             <button onClick={() => { setIsEditing(true); setMenuOpen(false); }} className="w-full text-left px-3 py-1.5 rounded hover:bg-surface-container flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-primary body-medium"><EditIcon className="w-4 h-4"/> Rename</button>
-                             <button onClick={handleDelete} className="w-full text-left px-3 py-1.5 rounded text-error hover:bg-error/10 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-primary body-medium"><TrashIcon className="w-4 h-4"/> Delete</button>
+                             <button onClick={() => { setIsEditing(true); setMenuOpen(false); }} className="w-full text-left px-3 py-2 rounded hover:bg-surface-container flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-primary body-medium"><EditIcon className="w-4 h-4"/> Rename</button>
+                             <button onClick={handleDelete} className="w-full text-left px-3 py-2 rounded text-error hover:bg-error/10 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-primary body-medium"><TrashIcon className="w-4 h-4"/> Delete</button>
                              <div className="border-t border-outline my-1"></div>
                              <div className="p-1 flex justify-around">
                                 {Object.keys(CATEGORY_COLORS).filter(c => c !== 'gray').map(color => (
@@ -133,7 +133,7 @@ const CategoryItem: React.FC<{
                         <div key={project.id} className="flex items-center group pr-1">
                             <button 
                                 onClick={() => setCurrentView({ type: 'project', id: project.id })}
-                                className={`flex-grow text-left flex items-center gap-2 px-2 py-1.5 rounded-md truncate focus:outline-none focus:ring-2 focus:ring-primary body-medium ${currentView.id === project.id ? 'bg-primary/20 text-primary' : 'hover:bg-surface-container text-on-surface-variant'}`}
+                                className={`flex-grow text-left flex items-center gap-2 px-2 py-2 rounded-md truncate focus:outline-none focus:ring-2 focus:ring-primary body-medium ${currentView.id === project.id ? 'bg-primary/20 text-primary' : 'hover:bg-surface-container text-on-surface-variant'}`}
                             >
                                 <ProjectIcon type={project.type} className="w-4 h-4 flex-shrink-0" />
                                 <span className="truncate">{project.name}</span>
@@ -150,7 +150,7 @@ const CategoryItem: React.FC<{
                             </button>
                         </div>
                     ))}
-                    <button onClick={handleAddNewProject} className="w-full text-left flex items-center gap-2 px-2 py-1.5 rounded-md text-on-surface-variant hover:bg-surface-container focus:outline-none focus:ring-2 focus:ring-primary body-medium">
+                    <button onClick={handleAddNewProject} className="w-full text-left flex items-center gap-2 px-2 py-2 rounded-md text-on-surface-variant hover:bg-surface-container focus:outline-none focus:ring-2 focus:ring-primary body-medium">
                         <PlusIcon className="w-4 h-4" /> Add new project...
                     </button>
                 </div>
