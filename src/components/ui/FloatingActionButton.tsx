@@ -43,7 +43,7 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({ onAddProjec
                         tabIndex={isOpen ? 0 : -1}
                     >
                         {action.icon}
-                        <span className="font-semibold">{action.label}</span>
+                        <span className="label-large">{action.label}</span>
                     </button>
                 ))}
             </div>

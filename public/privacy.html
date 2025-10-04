@@ -26,9 +26,26 @@
         --color-on-surface-variant: 198 196 208;
       }
       body {
+        font-family: 'Inter', sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
       }
+       /* Type Scale */
+      .display-large { font-size: 3.5625rem; line-height: 4rem; font-weight: 400; letter-spacing: -0.015625em; }
+      .display-medium { font-size: 2.8125rem; line-height: 3.25rem; font-weight: 400; }
+      .display-small { font-size: 2.25rem; line-height: 2.75rem; font-weight: 400; }
+      .headline-large { font-size: 2rem; line-height: 2.5rem; font-weight: 400; }
+      .headline-medium { font-size: 1.75rem; line-height: 2.25rem; font-weight: 400; }
+      .headline-small { font-size: 1.5rem; line-height: 2rem; font-weight: 500; }
+      .title-large { font-size: 1.375rem; line-height: 1.75rem; font-weight: 500; }
+      .title-medium { font-size: 1rem; line-height: 1.5rem; font-weight: 500; letter-spacing: 0.009375em; }
+      .title-small { font-size: 0.875rem; line-height: 1.25rem; font-weight: 500; letter-spacing: 0.0071428571em; }
+      .label-large { font-size: 0.875rem; line-height: 1.25rem; font-weight: 500; letter-spacing: 0.0071428571em; }
+      .label-medium { font-size: 0.75rem; line-height: 1rem; font-weight: 500; letter-spacing: 0.0416666667em; }
+      .label-small { font-size: 0.6875rem; line-height: 1rem; font-weight: 500; letter-spacing: 0.0454545455em; }
+      .body-large { font-size: 1rem; line-height: 1.5rem; font-weight: 400; letter-spacing: 0.005em; }
+      .body-medium { font-size: 0.875rem; line-height: 1.25rem; font-weight: 400; letter-spacing: 0.0178571429em; }
+      .body-small { font-size: 0.75rem; line-height: 1rem; font-weight: 400; letter-spacing: 0.0333333333em; }
     </style>
     <script>
       tailwind.config = {
@@ -42,37 +59,34 @@
               'surface-container': 'rgb(var(--color-surface-container) / <alpha-value>)',
               'on-surface': 'rgb(var(--color-on-surface) / <alpha-value>)',
               'on-surface-variant': 'rgb(var(--color-on-surface-variant) / <alpha-value>)',
-            },
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-            },
+            }
           }
         }
       }
     </script>
   </head>
-  <body class="bg-surface text-on-surface font-sans">
+  <body class="bg-surface text-on-surface">
     <div class="max-w-4xl mx-auto p-8 prose">
-      <h1 class="text-3xl font-bold text-on-surface">Privacy Policy</h1>
-      <p class="text-on-surface-variant">Last Updated: October 2, 2025</p>
+      <h1 class="display-small text-on-surface">Privacy Policy</h1>
+      <p class="body-large text-on-surface-variant">Last Updated: October 2, 2025</p>
 
-      <h2 class="text-2xl font-bold text-on-surface mt-8">1. Introduction</h2>
-      <p class="text-on-surface-variant">Welcome to Clarity Board. We are committed to protecting your privacy. This Privacy Policy explains how we handle your information when you use our application. By using Clarity Board, you agree to the collection and use of information in accordance with this policy.</p>
+      <h2 class="headline-small text-on-surface mt-8">1. Introduction</h2>
+      <p class="body-large text-on-surface-variant">Welcome to Clarity Board. We are committed to protecting your privacy. This Privacy Policy explains how we handle your information when you use our application. By using Clarity Board, you agree to the collection and use of information in accordance with this policy.</p>
 
-      <h2 class="text-2xl font-bold text-on-surface mt-8">2. Data Storage</h2>
-      <p class="text-on-surface-variant">Clarity Board is a privacy-first application. All data you create, including projects, notes, checklists, categories, and settings, is stored exclusively on your local device within your web browser's storage (IndexedDB). Your data is never sent to, or stored on, any external servers controlled by us.</p>
+      <h2 class="headline-small text-on-surface mt-8">2. Data Storage</h2>
+      <p class="body-large text-on-surface-variant">Clarity Board is a privacy-first application. All data you create, including projects, notes, checklists, categories, and settings, is stored exclusively on your local device within your web browser's storage (IndexedDB). Your data is never sent to, or stored on, any external servers controlled by us.</p>
 
-      <h2 class="text-2xl font-bold text-on-surface mt-8">3. AI Features</h2>
-      <p class="text-on-surface-variant">Our application offers optional AI features powered by the Google Gemini API. When you choose to use an AI feature (such as "Smart Split" or "Enhance Text"), only the specific text you provide for that feature is sent to the Google Gemini API for processing. We do not send any other personal data or project information. Your use of these features is subject to Google's Privacy Policy and Terms of Service.</p>
+      <h2 class="headline-small text-on-surface mt-8">3. AI Features</h2>
+      <p class="body-large text-on-surface-variant">Our application offers optional AI features powered by the Google Gemini API. When you choose to use an AI feature (such as "Smart Split" or "Enhance Text"), only the specific text you provide for that feature is sent to the Google Gemini API for processing. We do not send any other personal data or project information. Your use of these features is subject to Google's Privacy Policy and Terms of Service.</p>
 
-      <h2 class="text-2xl font-bold text-on-surface mt-8">4. Data Export and Import</h2>
-      <p class="text-on-surface-variant">You have the option to export all your application data as a local JSON file for backup purposes. Similarly, you can import a previously exported backup file to restore your data. This process is entirely managed by you on your local device.</p>
+      <h2 class="headline-small text-on-surface mt-8">4. Data Export and Import</h2>
+      <p class="body-large text-on-surface-variant">You have the option to export all your application data as a local JSON file for backup purposes. Similarly, you can import a previously exported backup file to restore your data. This process is entirely managed by you on your local device.</p>
 
-      <h2 class="text-2xl font-bold text-on-surface mt-8">5. No Tracking or Analytics</h2>
-      <p class="text-on-surface-variant">We do not use any tracking cookies, analytics services, or other mechanisms to monitor your usage of the application. We do not collect any personal information, IP addresses, or device information.</p>
+      <h2 class="headline-small text-on-surface mt-8">5. No Tracking or Analytics</h2>
+      <p class="body-large text-on-surface-variant">We do not use any tracking cookies, analytics services, or other mechanisms to monitor your usage of the application. We do not collect any personal information, IP addresses, or device information.</p>
 
-      <h2 class="text-2xl font-bold text-on-surface mt-8">6. Changes to This Privacy Policy</h2>
-      <p class="text-on-surface-variant">We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.</p>
+      <h2 class="headline-small text-on-surface mt-8">6. Changes to This Privacy Policy</h2>
+      <p class="body-large text-on-surface-variant">We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.</p>
     </div>
   </body>
 </html>

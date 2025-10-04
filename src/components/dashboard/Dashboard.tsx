@@ -16,8 +16,8 @@ const StatCard: React.FC<{ title: string, value: string | number, icon: React.Re
             {icon}
         </div>
         <div>
-            <p className="text-sm text-on-surface-variant">{title}</p>
-            <p className="text-xl sm:text-2xl font-bold text-on-surface">{value}</p>
+            <p className="text-on-surface-variant body-medium">{title}</p>
+            <p className="text-on-surface headline-medium">{value}</p>
         </div>
     </button>
 );
@@ -37,13 +37,13 @@ const ProjectSummaryCard: React.FC<{ project: Project; categoryName: string; onS
                 return (
                     <div>
                         <div className="flex justify-between items-center mb-1">
-                            <span className="text-xs font-medium text-on-surface-variant">Progress</span>
-                            <span className="text-xs font-bold text-on-surface">{progress}%</span>
+                            <span className="font-medium text-on-surface-variant label-small">Progress</span>
+                            <span className="font-bold text-on-surface label-small">{progress}%</span>
                         </div>
                         <div className="w-full bg-outline/20 rounded-full h-1.5">
                             <div className="bg-primary h-1.5 rounded-full" style={{ width: `${progress}%` }}></div>
                         </div>
-                        <p className="text-xs text-on-surface-variant mt-2 truncate">{statusSummary}</p>
+                        <p className="text-on-surface-variant mt-2 truncate body-small">{statusSummary}</p>
                     </div>
                 );
             }
@@ -56,8 +56,8 @@ const ProjectSummaryCard: React.FC<{ project: Project; categoryName: string; onS
                 return (
                     <div>
                         <div className="flex justify-between items-center mb-1">
-                            <span className="text-xs font-medium text-on-surface-variant">{completedItems}/{totalItems} Completed</span>
-                            <span className="text-xs font-bold text-on-surface">{progress}%</span>
+                            <span className="font-medium text-on-surface-variant label-small">{completedItems}/{totalItems} Completed</span>
+                            <span className="font-bold text-on-surface label-small">{progress}%</span>
                         </div>
                         <div className="w-full bg-outline/20 rounded-full h-1.5">
                             <div className="bg-primary h-1.5 rounded-full" style={{ width: `${progress}%` }}></div>
@@ -74,7 +74,7 @@ const ProjectSummaryCard: React.FC<{ project: Project; categoryName: string; onS
                     .replace(/\n/g, ' ')
                     .substring(0, 100);
                 return (
-                    <p className="text-xs text-on-surface-variant leading-relaxed">
+                    <p className="text-on-surface-variant body-small">
                         {snippet}{snippet.length === 100 ? '...' : ''}
                     </p>
                 );
@@ -92,12 +92,12 @@ const ProjectSummaryCard: React.FC<{ project: Project; categoryName: string; onS
             <div>
                 <div className="flex items-start justify-between">
                     <ProjectIcon type={project.type} className="w-6 h-6 text-primary" />
-                    <p className="text-xs text-on-surface-variant">
+                    <p className="text-on-surface-variant body-small">
                         {formatDistanceToNow(new Date(project.lastModified), { addSuffix: true })}
                     </p>
                 </div>
-                <h3 className="font-bold text-on-surface mt-2 truncate">{project.name}</h3>
-                <p className="text-sm text-on-surface-variant">{categoryName}</p>
+                <h3 className="text-on-surface mt-2 truncate title-medium">{project.name}</h3>
+                <p className="text-on-surface-variant body-medium">{categoryName}</p>
             </div>
             <div className="mt-2">{renderCardContent()}</div>
         </button>
@@ -132,7 +132,7 @@ const Dashboard: React.FC<DashboardProps> = ({ appData, onOpenSmartSplitModal, o
             {/* Stats */}
             <section>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-                    <StatCard title="Total Projects" value={appData.projects.length} icon={<FolderIcon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />} onClick={onShowAllProjects} />
+                    <StatCard title="Total Projects" value={appData.projects.length} icon={<FolderIcon className="w-5 h-5 sm:w-6 sm-h-6 text-primary" />} onClick={onShowAllProjects} />
                     <StatCard title="Total Items" value={totalItems} icon={<PresentationChartLineIcon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />} />
                     <StatCard title="Items Completed" value={completedItems} icon={<ClipboardCheckIcon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />} />
                     <StatCard title="Categories" value={appData.categories.length} icon={<ViewGridIcon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />} onClick={onShowAllProjects} />
@@ -145,12 +145,12 @@ const Dashboard: React.FC<DashboardProps> = ({ appData, onOpenSmartSplitModal, o
                     <SparklesIcon className="w-10 h-10" />
                 </div>
                 <div className="flex-grow">
-                    <h2 className="text-2xl font-bold text-on-surface">Meet the new AI Smart Split</h2>
-                    <p className="text-on-surface-variant mt-1">Paste a block of text and watch our AI automatically split it into organized tasks on your board.</p>
+                    <h2 className="text-on-surface headline-small">Meet the new AI Smart Split</h2>
+                    <p className="text-on-surface-variant mt-1 body-large">Paste a block of text and watch our AI automatically split it into organized tasks on your board.</p>
                 </div>
                 <button 
                     onClick={onOpenSmartSplitModal}
-                    className="bg-primary text-on-primary font-bold py-3 px-6 rounded-lg whitespace-nowrap hover:bg-primary/90 transition-colors"
+                    className="bg-primary text-on-primary py-3 px-6 rounded-lg whitespace-nowrap hover:bg-primary/90 transition-colors label-large"
                 >
                     Try It Now
                 </button>
@@ -158,7 +158,7 @@ const Dashboard: React.FC<DashboardProps> = ({ appData, onOpenSmartSplitModal, o
             
             {/* Recent Activity */}
             <section>
-                <h2 className="text-xl font-bold text-on-surface mb-4 flex items-center gap-2">
+                <h2 className="text-on-surface mb-4 flex items-center gap-2 title-large">
                     <ClockIcon className="w-6 h-6 text-on-surface-variant" />
                     Recent Activity
                 </h2>
@@ -172,8 +172,8 @@ const Dashboard: React.FC<DashboardProps> = ({ appData, onOpenSmartSplitModal, o
                         />
                     )) : (
                     <div className="col-span-full text-center text-on-surface-variant py-12 bg-surface-container rounded-lg">
-                        <p>No recent activity yet.</p>
-                        <p className="text-sm mt-1">Create a new project to get started!</p>
+                        <p className="title-large">No recent activity yet.</p>
+                        <p className="mt-1 body-medium">Create a new project to get started!</p>
                     </div>
                     )}
                 </div>

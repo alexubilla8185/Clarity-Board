@@ -22,13 +22,13 @@ interface SidebarProps {
 }
 
 const CATEGORY_COLORS: { [key: string]: string } = {
-    blue: 'bg-blue-500',
-    green: 'bg-green-500',
-    red: 'bg-red-500',
-    yellow: 'bg-yellow-500',
-    purple: 'bg-purple-500',
-    pink: 'bg-pink-500',
-    gray: 'bg-gray-400'
+    blue: 'bg-primary',
+    green: 'bg-success',
+    red: 'bg-error',
+    yellow: 'bg-highlight',
+    purple: 'bg-accent-purple',
+    pink: 'bg-accent-pink',
+    gray: 'bg-outline'
 };
 
 const CategoryItem: React.FC<{ 
@@ -85,7 +85,7 @@ const CategoryItem: React.FC<{
             <div className="flex items-center justify-between group px-2 py-2 rounded-md hover:bg-surface-container">
                 <button onClick={() => setExpanded(!isExpanded)} aria-expanded={isExpanded} className="flex items-center gap-2 flex-grow text-left focus:outline-none focus:ring-2 focus:ring-primary rounded-sm">
                     <ChevronDownIcon className={`w-4 h-4 text-on-surface-variant transition-transform ${isExpanded ? '' : '-rotate-90'}`} />
-                    <span className={`w-3 h-3 rounded-full ${CATEGORY_COLORS[category.color] || 'bg-gray-400'}`}></span>
+                    <span className={`w-3 h-3 rounded-full ${CATEGORY_COLORS[category.color] || 'bg-outline'}`}></span>
                     {isEditing ? (
                         <input
                             type="text"
@@ -93,12 +93,12 @@ const CategoryItem: React.FC<{
                             onChange={(e) => setName(e.target.value)}
                             onBlur={handleRename}
                             onKeyDown={(e) => e.key === 'Enter' && handleRename()}
-                            className="bg-surface text-on-surface text-sm font-semibold focus:ring-1 focus:ring-primary focus:outline-none rounded w-full"
+                            className="bg-surface text-on-surface focus:ring-1 focus:ring-primary focus:outline-none rounded w-full label-large"
                             autoFocus
                             disabled={category.id === 'null'}
                         />
                     ) : (
-                        <span className="text-sm font-semibold text-on-surface flex-grow">{category.name}</span>
+                        <span className="text-on-surface flex-grow label-large">{category.name}</span>
                     )}
                 </button>
                 <div className="relative">
@@ -115,8 +115,8 @@ const CategoryItem: React.FC<{
                      )}
                     {isMenuOpen && (
                         <div id={`category-menu-${category.id}`} className="absolute right-0 mt-2 w-48 bg-surface rounded-md shadow-3 z-10 p-2 border border-outline">
-                             <button onClick={() => { setIsEditing(true); setMenuOpen(false); }} className="w-full text-left px-3 py-1.5 text-sm rounded hover:bg-surface-container flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-primary"><EditIcon className="w-4 h-4"/> Rename</button>
-                             <button onClick={handleDelete} className="w-full text-left px-3 py-1.5 text-sm rounded text-error hover:bg-error/10 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-primary"><TrashIcon className="w-4 h-4"/> Delete</button>
+                             <button onClick={() => { setIsEditing(true); setMenuOpen(false); }} className="w-full text-left px-3 py-1.5 rounded hover:bg-surface-container flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-primary body-medium"><EditIcon className="w-4 h-4"/> Rename</button>
+                             <button onClick={handleDelete} className="w-full text-left px-3 py-1.5 rounded text-error hover:bg-error/10 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-primary body-medium"><TrashIcon className="w-4 h-4"/> Delete</button>
                              <div className="border-t border-outline my-1"></div>
                              <div className="p-1 flex justify-around">
                                 {Object.keys(CATEGORY_COLORS).filter(c => c !== 'gray').map(color => (
@@ -133,7 +133,7 @@ const CategoryItem: React.FC<{
                         <div key={project.id} className="flex items-center group pr-1">
                             <button 
                                 onClick={() => setCurrentView({ type: 'project', id: project.id })}
-                                className={`flex-grow text-left flex items-center gap-2 px-2 py-1.5 rounded-md text-sm truncate focus:outline-none focus:ring-2 focus:ring-primary ${currentView.id === project.id ? 'bg-primary/20 text-primary' : 'hover:bg-surface-container text-on-surface-variant'}`}
+                                className={`flex-grow text-left flex items-center gap-2 px-2 py-1.5 rounded-md truncate focus:outline-none focus:ring-2 focus:ring-primary body-medium ${currentView.id === project.id ? 'bg-primary/20 text-primary' : 'hover:bg-surface-container text-on-surface-variant'}`}
                             >
                                 <ProjectIcon type={project.type} className="w-4 h-4 flex-shrink-0" />
                                 <span className="truncate">{project.name}</span>
@@ -150,7 +150,7 @@ const CategoryItem: React.FC<{
                             </button>
                         </div>
                     ))}
-                    <button onClick={handleAddNewProject} className="w-full text-left flex items-center gap-2 px-2 py-1.5 rounded-md text-sm text-on-surface-variant hover:bg-surface-container focus:outline-none focus:ring-2 focus:ring-primary">
+                    <button onClick={handleAddNewProject} className="w-full text-left flex items-center gap-2 px-2 py-1.5 rounded-md text-on-surface-variant hover:bg-surface-container focus:outline-none focus:ring-2 focus:ring-primary body-medium">
                         <PlusIcon className="w-4 h-4" /> Add new project...
                     </button>
                 </div>
@@ -169,7 +169,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, appData, setAppData, c
         <aside className={`fixed top-0 left-0 h-full w-64 bg-surface z-40 transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 transition-transform duration-300 ease-in-out border-r border-outline flex flex-col`}>
             <div className="p-4 flex items-center gap-3 flex-shrink-0">
                 <img src="/favicon.svg" alt="Clarity Board Logo" className="w-8 h-8" />
-                <h1 className="text-2xl font-bold text-on-surface">
+                <h1 className="text-on-surface headline-small">
                     <span className="text-primary">Clarity</span> Board
                 </h1>
             </div>
@@ -177,7 +177,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, appData, setAppData, c
                 <div>
                      <button 
                         onClick={() => setCurrentView({ type: 'dashboard', id: null })}
-                        className={`w-full flex items-center gap-3 px-3 py-2 rounded-md font-semibold text-sm focus:outline-none focus:ring-2 focus:ring-primary ${currentView.type === 'dashboard' ? 'bg-primary/20 text-primary' : 'hover:bg-surface-container text-on-surface'}`}
+                        className={`w-full flex items-center gap-3 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-primary label-large ${currentView.type === 'dashboard' ? 'bg-primary/20 text-primary' : 'hover:bg-surface-container text-on-surface'}`}
                     >
                         <HomeIcon className="w-5 h-5" /> Dashboard
                     </button>
@@ -185,7 +185,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, appData, setAppData, c
 
                 <div className="space-y-1">
                     <div className="flex justify-between items-center px-2">
-                        <h2 className="text-xs font-bold uppercase text-on-surface-variant">Categories</h2>
+                        <h2 className="uppercase text-on-surface-variant label-medium">Categories</h2>
                          <button onClick={onAddCategory} aria-label="Add new category" className="p-1 rounded-full hover:bg-outline/20 focus:outline-none focus:ring-2 focus:ring-primary">
                             <PlusIcon className="w-4 h-4 text-on-surface-variant" />
                         </button>
@@ -225,7 +225,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, appData, setAppData, c
                     aria-haspopup="true"
                     className="w-full flex items-center gap-3 p-2 rounded-md hover:bg-surface-container focus:outline-none focus:ring-2 focus:ring-primary flex-grow">
                     <Avatar userSettings={userSettings} size="sm" />
-                    <span className="font-semibold text-on-surface text-sm truncate">{userSettings.name}</span>
+                    <span className="text-on-surface truncate label-large">{userSettings.name}</span>
                 </button>
                 <button onClick={onOpenHelp} aria-label="Open help center" className="p-2 rounded-full text-on-surface-variant hover:bg-surface-container focus:outline-none focus:ring-2 focus:ring-primary flex-shrink-0">
                     <QuestionMarkCircleIcon className="w-6 h-6" />

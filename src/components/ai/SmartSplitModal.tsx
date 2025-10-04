@@ -35,14 +35,14 @@ const SmartSplitModal: React.FC<SmartSplitModalProps> = ({ isOpen, onClose, onSu
   return (
     <Modal isOpen={isOpen} onClose={handleClose} title="AI Smart Split">
       <div className="space-y-4">
-        <p className="text-sm text-on-surface-variant">
+        <p className="body-medium text-on-surface-variant">
           Paste in your notes, a block of text, or a list of items. The AI will analyze it and create a structured project board for you.
         </p>
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
           rows={10}
-          className="w-full p-2 rounded-sm bg-surface text-on-surface border border-outline focus:outline-none focus:ring-2 focus:ring-primary disabled:opacity-50"
+          className="w-full p-2 rounded-sm bg-surface text-on-surface border border-outline focus:outline-none focus:ring-2 focus:ring-primary disabled:opacity-50 body-large"
           placeholder="e.g., Meeting notes from today's sync..."
           disabled={isLoading}
         />
@@ -50,7 +50,7 @@ const SmartSplitModal: React.FC<SmartSplitModalProps> = ({ isOpen, onClose, onSu
           <button
             type="button"
             onClick={handleClose}
-            className="bg-surface-container hover:bg-outline/20 text-on-surface font-medium py-2 px-4 rounded-sm transition-colors disabled:opacity-50"
+            className="bg-surface-container hover:bg-outline/20 text-on-surface py-2 px-4 rounded-sm transition-colors disabled:opacity-50 label-large"
             disabled={isLoading}
           >
             Cancel
@@ -58,7 +58,7 @@ const SmartSplitModal: React.FC<SmartSplitModalProps> = ({ isOpen, onClose, onSu
           <button
             type="button"
             onClick={handleSubmit}
-            className="bg-primary hover:bg-primary/90 text-on-primary font-bold py-2 px-4 rounded-sm transition-colors flex items-center justify-center min-w-[120px] disabled:opacity-50"
+            className="bg-primary hover:bg-primary/90 text-on-primary py-2 px-4 rounded-sm transition-colors flex items-center justify-center min-w-[120px] disabled:opacity-50 label-large"
             disabled={isLoading}
           >
             {isLoading ? (

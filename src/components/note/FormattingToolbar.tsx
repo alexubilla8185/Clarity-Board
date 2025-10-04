@@ -25,9 +25,9 @@ const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onApplyFormat }) 
         <span className="italic">I</span>
       </ToolbarButton>
       <div className="border-l h-5 mx-1 border-outline"></div>
-      <ToolbarButton onClick={() => onApplyFormat('h1')} title="Heading 1"><span className="font-bold text-sm">H1</span></ToolbarButton>
-      <ToolbarButton onClick={() => onApplyFormat('h2')} title="Heading 2"><span className="font-bold text-sm">H2</span></ToolbarButton>
-      <ToolbarButton onClick={() => onApplyFormat('h3')} title="Heading 3"><span className="font-bold text-sm">H3</span></ToolbarButton>
+      <ToolbarButton onClick={() => onApplyFormat('h1')} title="Heading 1"><span className="label-medium font-bold">H1</span></ToolbarButton>
+      <ToolbarButton onClick={() => onApplyFormat('h2')} title="Heading 2"><span className="label-medium font-bold">H2</span></ToolbarButton>
+      <ToolbarButton onClick={() => onApplyFormat('h3')} title="Heading 3"><span className="label-medium font-bold">H3</span></ToolbarButton>
       <div className="border-l h-5 mx-1 border-outline"></div>
       <ToolbarButton onClick={() => onApplyFormat('ul')} title="Unordered List">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" /></svg>

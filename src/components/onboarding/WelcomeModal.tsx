@@ -14,10 +14,10 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ isOpen, onStartFresh, onTry
     <div className="fixed inset-0 bg-surface/90 backdrop-blur-sm z-50 flex items-center justify-center p-4">
       <div className="bg-surface-container rounded-lg shadow-3 w-full max-w-3xl text-center p-6 md:p-12 animate-fade-in-up max-h-[95vh] overflow-y-auto">
         <img src="/favicon.svg" alt="Clarity Board Logo" className="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 md:mb-6" />
-        <h1 className="text-3xl md:text-4xl font-bold text-on-surface">
+        <h1 className="text-on-surface display-medium">
           Welcome to <span className="text-primary">Clarity Board</span>
         </h1>
-        <p className="mt-3 text-base md:text-lg text-on-surface-variant max-w-xl mx-auto">
+        <p className="mt-3 text-on-surface-variant max-w-xl mx-auto title-medium">
           Your new privacy-first, offline-ready productivity hub. All your data stays on your device.
         </p>
 
@@ -27,8 +27,8 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ isOpen, onStartFresh, onTry
                 <SparklesIcon className="w-6 h-6" />
             </div>
             <div>
-                <h4 className="font-semibold text-on-surface">AI-Powered</h4>
-                <p className="text-sm text-on-surface-variant">Use Smart Split to generate projects from your notes, and enhance cards with AI brainstorming, summaries, and improvements.</p>
+                <h4 className="text-on-surface title-medium">AI-Powered</h4>
+                <p className="text-on-surface-variant body-medium">Use Smart Split to generate projects from your notes, and enhance cards with AI brainstorming, summaries, and improvements.</p>
             </div>
           </div>
            <div className="flex items-start gap-4">
@@ -36,8 +36,8 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ isOpen, onStartFresh, onTry
                 <ShieldCheckIcon className="w-6 h-6" />
             </div>
             <div>
-                <h4 className="font-semibold text-on-surface">100% Private</h4>
-                <p className="text-sm text-on-surface-variant">Your data is yours alone. It's stored locally on your device with no accounts, no cloud, and no tracking.</p>
+                <h4 className="text-on-surface title-medium">100% Private</h4>
+                <p className="text-on-surface-variant body-medium">Your data is yours alone. It's stored locally on your device with no accounts, no cloud, and no tracking.</p>
             </div>
           </div>
         </div>
@@ -45,13 +45,13 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ isOpen, onStartFresh, onTry
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <button 
             onClick={onTrySampleData}
-            className="bg-primary hover:bg-primary/90 text-on-primary font-bold py-3 px-6 rounded-lg transition-all w-full sm:w-auto animate-pulse-cta"
+            className="bg-primary hover:bg-primary/90 text-on-primary py-3 px-6 rounded-lg transition-all w-full sm:w-auto animate-pulse-cta label-large"
           >
             Try with Sample Data
           </button>
            <button 
             onClick={onStartFresh}
-            className="bg-surface-container hover:bg-outline/20 text-on-surface font-medium py-3 px-6 rounded-lg transition-colors w-full sm:w-auto border border-outline/40 hover:border-outline"
+            className="bg-surface-container hover:bg-outline/20 text-on-surface py-3 px-6 rounded-lg transition-colors w-full sm:w-auto border border-outline/40 hover:border-outline label-large"
           >
             Start with a Blank Workspace
           </button>

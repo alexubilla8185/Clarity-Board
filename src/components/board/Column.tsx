@@ -101,10 +101,10 @@ const Column: React.FC<ColumnProps> = ({
                 onBlur={handleTitleBlur}
                 onKeyDown={handleTitleKeyDown}
                 autoFocus
-                className="bg-surface text-on-surface font-semibold text-lg p-1 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-primary"
+                className="bg-surface text-on-surface p-1 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-primary title-medium"
             />
         ) : (
-            <h3 className="font-semibold text-lg text-on-surface w-full">
+            <h3 className="text-on-surface w-full title-medium">
                 <button onClick={() => setIsEditingTitle(true)} className="w-full text-left p-1 rounded-sm focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary">
                     {column.title}
                 </button>
@@ -134,7 +134,7 @@ const Column: React.FC<ColumnProps> = ({
             value={newCardTitle}
             onChange={(e) => setNewCardTitle(e.target.value)}
             placeholder="Enter a title for this card..."
-            className="w-full p-2 rounded-md bg-surface text-on-surface border border-outline focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-full p-2 rounded-md bg-surface text-on-surface border border-outline focus:outline-none focus:ring-2 focus:ring-primary body-large"
             autoFocus
             onKeyDown={(e) => {
               if (e.key === 'Enter' && !e.shiftKey) {
@@ -146,7 +146,7 @@ const Column: React.FC<ColumnProps> = ({
           <div className="mt-2 flex items-center gap-2">
             <button
               type="submit"
-              className="bg-primary hover:bg-primary/90 text-on-primary font-semibold py-1.5 px-3 rounded-sm text-sm transition-colors"
+              className="bg-primary hover:bg-primary/90 text-on-primary py-1.5 px-3 rounded-sm transition-colors label-large"
             >
               Add card
             </button>
@@ -163,7 +163,7 @@ const Column: React.FC<ColumnProps> = ({
       ) : (
         <button 
           onClick={() => setIsAddingCard(true)}
-          className="mt-2 w-full text-left p-2 rounded-md text-on-surface-variant hover:bg-outline/10 hover:text-on-surface transition-colors flex items-center focus:outline-none focus:ring-2 focus:ring-primary"
+          className="mt-2 w-full text-left p-2 rounded-md text-on-surface-variant hover:bg-outline/10 hover:text-on-surface transition-colors flex items-center focus:outline-none focus:ring-2 focus:ring-primary label-large"
         >
           <PlusIcon className="w-5 h-5 mr-2" /> Add a card
         </button>

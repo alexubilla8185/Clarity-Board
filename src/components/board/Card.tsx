@@ -60,7 +60,7 @@ const Card: React.FC<CardProps> = ({ card, onDelete, onOpenAiModal, onOpenEditMo
       onKeyDown={(e) => { if (!isDeleting && (e.key === 'Enter' || e.key === ' ')) onOpenEditModal(card); }}
     >
       <div className="flex justify-between items-start">
-        <h4 className="font-medium text-on-surface break-words pr-2">{card.title}</h4>
+        <h4 className="text-on-surface break-words pr-2 title-medium">{card.title}</h4>
         <div className="flex items-center space-x-1 opacity-0 group-hover:opacity-100 transition-opacity focus-within:opacity-100">
           <button onClick={() => onOpenEditModal(card)} aria-label="Edit card" className="p-1 text-on-surface-variant hover:text-primary rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary">
             <EditIcon className="w-4 h-4" />
@@ -73,7 +73,7 @@ const Card: React.FC<CardProps> = ({ card, onDelete, onOpenAiModal, onOpenEditMo
           </button>
         </div>
       </div>
-      {card.description && <p className="text-sm text-on-surface-variant mt-2 break-words whitespace-pre-wrap leading-relaxed">{card.description}</p>}
+      {card.description && <p className="text-on-surface-variant mt-2 break-words whitespace-pre-wrap body-medium">{card.description}</p>}
     </div>
   );
 };

@@ -7,13 +7,13 @@
     
     <!-- SEO Meta Tags -->
     <meta name="description" content="Intelligent Task & Note Management. Organize categories, deploy Kanban boards, and utilize AI to instantly draft structured projects. Designed for professional efficiency." />
-    <meta name="theme-color" content="#1f2937" />
+    <meta name="theme-color" content="#121212" />
     <meta name="apple-mobile-web-app-title" content="Clarity" />
 
     <!-- Favicons & PWA -->
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="shortcut" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.json" />
     
@@ -49,6 +49,14 @@
         --color-on-error: 255 255 255;
         --color-highlight: 252 211 77; /* Yellow 400 */
         --color-on-highlight: 28 27 31; /* Almost black */
+        --color-success: 34 197 94; /* Green 500 */
+        --color-on-success: 255 255 255;
+        --color-accent-purple: 168 85 247; /* Purple 500 */
+        --color-on-accent-purple: 255 255 255;
+        --color-accent-pink: 236 72 153; /* Pink 500 */
+        --color-on-accent-pink: 255 255 255;
+        --color-accent-teal: 20 184 166; /* Teal 500 */
+        --color-on-accent-teal: 255 255 255;
       }
       .dark {
         --color-primary: 96 165 250;
@@ -63,6 +71,14 @@
         --color-on-error: 96 20 16;
         --color-highlight: 250 204 21; /* Yellow 500 */
         --color-on-highlight: 18 18 18; /* Almost black */
+        --color-success: 134 239 172; /* Green 300 */
+        --color-on-success: 20 83 45; /* Green 900 */
+        --color-accent-purple: 192 132 252; /* Purple 300 */
+        --color-on-accent-purple: 88 28 135; /* Purple 900 */
+        --color-accent-pink: 244 114 182; /* Pink 400 */
+        --color-on-accent-pink: 131 24 67; /* Pink 900 */
+        --color-accent-teal: 94 234 212; /* Teal 300 */
+        --color-on-accent-teal: 13 74 80; /* Teal 900 */
       }
       .true-dark {
         --color-primary: 96 165 250;
@@ -77,18 +93,44 @@
         --color-on-error: 96 20 16;
         --color-highlight: 250 204 21; /* Yellow 500 */
         --color-on-highlight: 18 18 18; /* Almost black */
+        --color-success: 134 239 172; /* Green 300 */
+        --color-on-success: 20 83 45; /* Green 900 */
+        --color-accent-purple: 192 132 252; /* Purple 300 */
+        --color-on-accent-purple: 88 28 135; /* Purple 900 */
+        --color-accent-pink: 244 114 182; /* Pink 400 */
+        --color-on-accent-pink: 131 24 67; /* Pink 900 */
+        --color-accent-teal: 94 234 212; /* Teal 300 */
+        --color-on-accent-teal: 13 74 80; /* Teal 900 */
       }
       body {
+        font-family: 'Inter', sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
       }
       mark {
         background-color: rgb(var(--color-highlight));
         color: rgb(var(--color-on-highlight));
-        font-weight: 700;
+        font-weight: 500;
         padding: 1px 3px;
         border-radius: 4px;
       }
+      /* Type Scale */
+      .display-large { font-size: 3.5625rem; line-height: 4rem; font-weight: 400; letter-spacing: -0.015625em; }
+      .display-medium { font-size: 2.8125rem; line-height: 3.25rem; font-weight: 400; }
+      .display-small { font-size: 2.25rem; line-height: 2.75rem; font-weight: 400; }
+      .headline-large { font-size: 2rem; line-height: 2.5rem; font-weight: 400; }
+      .headline-medium { font-size: 1.75rem; line-height: 2.25rem; font-weight: 400; }
+      .headline-small { font-size: 1.5rem; line-height: 2rem; font-weight: 500; }
+      .title-large { font-size: 1.375rem; line-height: 1.75rem; font-weight: 500; }
+      .title-medium { font-size: 1rem; line-height: 1.5rem; font-weight: 500; letter-spacing: 0.009375em; }
+      .title-small { font-size: 0.875rem; line-height: 1.25rem; font-weight: 500; letter-spacing: 0.0071428571em; }
+      .label-large { font-size: 0.875rem; line-height: 1.25rem; font-weight: 500; letter-spacing: 0.0071428571em; }
+      .label-medium { font-size: 0.75rem; line-height: 1rem; font-weight: 500; letter-spacing: 0.0416666667em; }
+      .label-small { font-size: 0.6875rem; line-height: 1rem; font-weight: 500; letter-spacing: 0.0454545455em; }
+      .body-large { font-size: 1rem; line-height: 1.5rem; font-weight: 400; letter-spacing: 0.005em; }
+      .body-medium { font-size: 0.875rem; line-height: 1.25rem; font-weight: 400; letter-spacing: 0.0178571429em; }
+      .body-small { font-size: 0.75rem; line-height: 1rem; font-weight: 400; letter-spacing: 0.0333333333em; }
+
     </style>
     <script>
       // Configure Tailwind CSS
@@ -107,9 +149,16 @@
               scrim: 'rgb(var(--color-scrim) / <alpha-value>)',
               error: 'rgb(var(--color-error) / <alpha-value>)',
               'on-error': 'rgb(var(--color-on-error) / <alpha-value>)',
-            },
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
+              highlight: 'rgb(var(--color-highlight) / <alpha-value>)',
+              'on-highlight': 'rgb(var(--color-on-highlight) / <alpha-value>)',
+              success: 'rgb(var(--color-success) / <alpha-value>)',
+              'on-success': 'rgb(var(--color-on-success) / <alpha-value>)',
+              'accent-purple': 'rgb(var(--color-accent-purple) / <alpha-value>)',
+              'on-accent-purple': 'rgb(var(--color-on-accent-purple) / <alpha-value>)',
+              'accent-pink': 'rgb(var(--color-accent-pink) / <alpha-value>)',
+              'on-accent-pink': 'rgb(var(--color-on-accent-pink) / <alpha-value>)',
+              'accent-teal': 'rgb(var(--color-accent-teal) / <alpha-value>)',
+              'on-accent-teal': 'rgb(var(--color-on-accent-teal) / <alpha-value>)',
             },
             borderRadius: {
               'sm': '8px',
@@ -142,7 +191,7 @@
 }
 </script>
   </head>
-  <body class="bg-surface text-on-surface font-sans">
+  <body class="bg-surface text-on-surface">
     <div id="root"></div>
     <script type="module" src="/src/index.tsx"></script>
     <script>

@@ -30,29 +30,29 @@ const EditCardForm: React.FC<EditCardFormProps> = ({ card, onSave, onCancel }) =
     return (
         <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-                <label className="block text-sm font-medium text-on-surface-variant mb-1">Title</label>
+                <label className="block mb-1 text-on-surface-variant label-large">Title</label>
                 <input
                     type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    className="w-full p-2 rounded-sm bg-surface text-on-surface border border-outline focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="w-full p-2 rounded-sm bg-surface text-on-surface border border-outline focus:outline-none focus:ring-2 focus:ring-primary body-large"
                     autoFocus
                 />
             </div>
             <div>
-                <label className="block text-sm font-medium text-on-surface-variant mb-1">Description</label>
+                <label className="block mb-1 text-on-surface-variant label-large">Description</label>
                 <textarea
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     rows={4}
-                    className="w-full p-2 rounded-sm bg-surface text-on-surface border border-outline focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="w-full p-2 rounded-sm bg-surface text-on-surface border border-outline focus:outline-none focus:ring-2 focus:ring-primary body-large"
                 />
             </div>
             <div className="flex justify-end gap-3 pt-2">
-                <button type="button" onClick={onCancel} className="bg-surface-container hover:bg-outline/20 text-on-surface font-medium py-2 px-4 rounded-sm transition-colors">
+                <button type="button" onClick={onCancel} className="bg-surface-container hover:bg-outline/20 text-on-surface py-2 px-4 rounded-sm transition-colors label-large">
                     Cancel
                 </button>
-                <button type="submit" className="bg-primary hover:bg-primary/90 text-on-primary font-bold py-2 px-4 rounded-sm transition-colors">
+                <button type="submit" className="bg-primary hover:bg-primary/90 text-on-primary py-2 px-4 rounded-sm transition-colors label-large">
                     Save Changes
                 </button>
             </div>
@@ -257,7 +257,7 @@ const Board: React.FC<BoardProps> = ({ project, onProjectUpdate, onDeleteColumn 
 
   const ListColumnDroppable = ({ id, children }: {id: string, children?: React.ReactNode}) => {
     const { setNodeRef } = useDroppable({ id, data: { type: 'Column' } });
-    return <div ref={setNodeRef} className="min-h-[80px] rounded-lg bg-black/5 dark:bg-white/5">{children}</div>;
+    return <div ref={setNodeRef} className="min-h-[80px] rounded-lg bg-on-surface/[.05]">{children}</div>;
   };
 
   return (
@@ -266,7 +266,7 @@ const Board: React.FC<BoardProps> = ({ project, onProjectUpdate, onDeleteColumn 
           <div className="flex items-center bg-surface-container rounded-lg p-1">
               <button
                   onClick={() => onProjectUpdate({ viewMode: 'board' })}
-                  className={`flex items-center gap-2 px-3 py-1 text-sm font-medium rounded-md transition-colors ${viewMode === 'board' ? 'bg-primary text-on-primary shadow-1' : 'text-on-surface-variant'}`}
+                  className={`flex items-center gap-2 px-3 py-1 rounded-md transition-colors label-large ${viewMode === 'board' ? 'bg-primary text-on-primary shadow-1' : 'text-on-surface-variant'}`}
                   aria-pressed={viewMode === 'board'}
               >
                   <ViewGridIcon className="w-5 h-5" />
@@ -274,7 +274,7 @@ const Board: React.FC<BoardProps> = ({ project, onProjectUpdate, onDeleteColumn 
               </button>
               <button
                   onClick={() => onProjectUpdate({ viewMode: 'list' })}
-                  className={`flex items-center gap-2 px-3 py-1 text-sm font-medium rounded-md transition-colors ${viewMode === 'list' ? 'bg-primary text-on-primary shadow-1' : 'text-on-surface-variant'}`}
+                  className={`flex items-center gap-2 px-3 py-1 rounded-md transition-colors label-large ${viewMode === 'list' ? 'bg-primary text-on-primary shadow-1' : 'text-on-surface-variant'}`}
                   aria-pressed={viewMode === 'list'}
               >
                   <Bars3Icon className="w-5 h-5" />
@@ -300,7 +300,7 @@ const Board: React.FC<BoardProps> = ({ project, onProjectUpdate, onDeleteColumn 
                 />
                 ))}
             </SortableContext>
-            <button onClick={addColumn} className="bg-surface-container hover:bg-outline/20 transition-colors text-on-surface-variant font-medium rounded-lg w-80 flex-shrink-0 p-3 flex items-center justify-center h-20">
+            <button onClick={addColumn} className="bg-surface-container hover:bg-outline/20 transition-colors text-on-surface-variant rounded-lg w-80 flex-shrink-0 p-3 flex items-center justify-center h-20 label-large">
                 <PlusIcon className="w-6 h-6 mr-2" /> Add another column
             </button>
             </div>
@@ -308,7 +308,7 @@ const Board: React.FC<BoardProps> = ({ project, onProjectUpdate, onDeleteColumn 
             <div className="space-y-8 max-w-4xl mx-auto">
                 {boardData.map(column => (
                     <section key={column.id} aria-labelledby={`list-column-title-${column.id}`}>
-                        <h2 id={`list-column-title-${column.id}`} className="font-semibold text-xl text-on-surface mb-3 px-1">{column.title}</h2>
+                        <h2 id={`list-column-title-${column.id}`} className="title-large text-on-surface mb-3 px-1">{column.title}</h2>
                         <ListColumnDroppable id={column.id}>
                             <SortableContext items={column.cards.map(c => c.id)} strategy={verticalListSortingStrategy}>
                                 <div className="space-y-3 p-2">
@@ -326,7 +326,7 @@ const Board: React.FC<BoardProps> = ({ project, onProjectUpdate, onDeleteColumn 
                         </ListColumnDroppable>
                     </section>
                 ))}
-                 <button onClick={addColumn} className="w-full bg-surface-container hover:bg-outline/20 transition-colors text-on-surface-variant font-medium rounded-lg p-3 flex items-center justify-center h-20">
+                 <button onClick={addColumn} className="w-full bg-surface-container hover:bg-outline/20 transition-colors text-on-surface-variant rounded-lg p-3 flex items-center justify-center h-20 label-large">
                     <PlusIcon className="w-6 h-6 mr-2" /> Add another section
                 </button>
             </div>
@@ -382,9 +382,9 @@ const Board: React.FC<BoardProps> = ({ project, onProjectUpdate, onDeleteColumn 
 
       {boardData.length === 0 && (
           <div className="text-center py-20">
-              <h2 className="text-2xl font-semibold text-on-surface">This project is empty.</h2>
-              <p className="text-on-surface-variant mt-2">Get started by adding a column or section.</p>
-              <button onClick={addColumn} className="mt-6 bg-primary hover:bg-primary/90 text-on-primary font-bold py-2 px-6 rounded-lg transition-colors">
+              <h2 className="headline-small text-on-surface">This project is empty.</h2>
+              <p className="text-on-surface-variant mt-2 body-large">Get started by adding a column or section.</p>
+              <button onClick={addColumn} className="mt-6 bg-primary hover:bg-primary/90 text-on-primary py-2 px-6 rounded-lg transition-colors label-large">
                 Add Section
               </button>
           </div>

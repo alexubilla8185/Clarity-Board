@@ -4,9 +4,9 @@ import { useDebounce } from '../../hooks/useDebounce';
 import { PlusIcon, TrashIcon, DotsHorizontalIcon } from '../ui/Icons';
 
 const PRIORITY_STYLES: { [key in Priority]: { base: string; text: string; label: string } } = {
-    [Priority.HIGH]: { base: 'bg-red-500/20', text: 'text-red-400', label: 'High' },
-    [Priority.MEDIUM]: { base: 'bg-yellow-500/20', text: 'text-yellow-400', label: 'Medium' },
-    [Priority.LOW]: { base: 'bg-blue-500/20', text: 'text-blue-400', label: 'Low' },
+    [Priority.HIGH]: { base: 'bg-error/20', text: 'text-error', label: 'High' },
+    [Priority.MEDIUM]: { base: 'bg-highlight/20', text: 'text-highlight', label: 'Medium' },
+    [Priority.LOW]: { base: 'bg-primary/20', text: 'text-primary', label: 'Low' },
 };
 
 const PRIORITY_CYCLE: Priority[] = [Priority.LOW, Priority.MEDIUM, Priority.HIGH];
@@ -77,11 +77,11 @@ const TaskItem: React.FC<TaskItemProps> = ({ item, onToggle, onUpdate, onDelete,
                         onChange={(e) => setEditText(e.target.value)}
                         onBlur={handleEditBlur}
                         onKeyDown={handleKeyDown}
-                        className="w-full bg-transparent text-on-surface focus:outline-none"
+                        className="w-full bg-transparent text-on-surface focus:outline-none body-large"
                         autoFocus
                     />
                 ) : (
-                    <button onClick={() => setIsEditing(true)} className={`w-full text-left rounded-sm focus:outline-none focus:ring-1 focus:ring-inset focus:ring-primary ${item.completed ? 'line-through' : ''}`}>
+                    <button onClick={() => setIsEditing(true)} className={`w-full text-left rounded-sm focus:outline-none focus:ring-1 focus:ring-inset focus:ring-primary body-large ${item.completed ? 'line-through' : ''}`}>
                         {item.text}
                     </button>
                 )}
@@ -90,7 +90,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ item, onToggle, onUpdate, onDelete,
             <button 
                 onClick={handlePriorityCycle}
                 aria-label={`Change priority for ${item.text}, current is ${PRIORITY_STYLES[item.priority].label}. Click to cycle priority.`}
-                className={`text-xs font-bold px-2 py-1 rounded-full transition-transform group-hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-surface-container ${PRIORITY_STYLES[item.priority].base} ${PRIORITY_STYLES[item.priority].text}`}
+                className={`px-2 py-1 rounded-full transition-transform group-hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-surface-container label-small ${PRIORITY_STYLES[item.priority].base} ${PRIORITY_STYLES[item.priority].text}`}
             >
                 {PRIORITY_STYLES[item.priority].label}
             </button>
@@ -167,8 +167,8 @@ const ChecklistEditor: React.FC<ChecklistEditorProps> = ({ initialChecklistData,
             {/* Progress Bar */}
             <div className="mb-4">
                 <div className="flex justify-between items-center mb-1">
-                    <span className="text-sm font-medium text-on-surface-variant">Progress</span>
-                    <span className="text-sm font-bold text-on-surface">{progress}%</span>
+                    <span className="text-on-surface-variant label-medium">Progress</span>
+                    <span className="text-on-surface label-medium">{progress}%</span>
                 </div>
                 <div className="w-full bg-surface-container rounded-full h-2.5">
                     <div className="bg-primary h-2.5 rounded-full transition-all duration-300" style={{width: `${progress}%`}}></div>
@@ -203,9 +203,9 @@ const ChecklistEditor: React.FC<ChecklistEditorProps> = ({ initialChecklistData,
                     value={newItemText}
                     onChange={(e) => setNewItemText(e.target.value)}
                     placeholder="Add a new task..."
-                    className="w-full p-3 rounded-lg bg-surface-container text-on-surface border border-transparent focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="w-full p-3 rounded-lg bg-surface-container text-on-surface border border-transparent focus:outline-none focus:ring-2 focus:ring-primary body-large"
                 />
-                <button type="submit" aria-label="Add new task" className="bg-primary text-on-primary rounded-lg px-6 font-bold flex items-center justify-center hover:bg-primary/90 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-surface">
+                <button type="submit" aria-label="Add new task" className="bg-primary text-on-primary rounded-lg px-6 flex items-center justify-center hover:bg-primary/90 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-surface label-large">
                     <PlusIcon className="w-6 h-6" />
                 </button>
             </form>

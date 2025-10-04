@@ -89,7 +89,7 @@ const UniversalSearchModal: React.FC<UniversalSearchModalProps> = ({ isOpen, onC
             value={query}
             onChange={e => setQuery(e.target.value)}
             placeholder="Search everything..."
-            className="w-full bg-transparent text-on-surface text-lg focus:outline-none"
+            className="w-full bg-transparent text-on-surface focus:outline-none title-large"
           />
            <button onClick={onClose} className="text-on-surface-variant hover:text-on-surface transition-colors" aria-label="Close search">
             <CloseIcon className="w-6 h-6" />
@@ -106,15 +106,15 @@ const UniversalSearchModal: React.FC<UniversalSearchModalProps> = ({ isOpen, onC
                     onMouseEnter={() => setActiveIndex(index)}
                     className={`w-full text-left p-3 rounded-md flex flex-col gap-1 ${activeIndex === index ? 'bg-primary/20' : 'hover:bg-outline/10'}`}
                   >
-                    <div className="flex items-center gap-2 text-xs text-on-surface-variant">
+                    <div className="flex items-center gap-2 text-on-surface-variant label-small">
                       <ProjectTypeIcon type={result.projectType} />
                       <span className="capitalize">{result.projectType}</span>
                       <span>&bull;</span>
                       <span>{result.projectCategoryName}</span>
                     </div>
-                    <p className="font-semibold text-on-surface">{result.title}</p>
+                    <p className="text-on-surface title-medium">{result.title}</p>
                     <p 
-                      className="text-sm text-on-surface-variant"
+                      className="text-on-surface-variant body-medium"
                       dangerouslySetInnerHTML={{ __html: result.snippet || '...' }}
                     />
                   </button>
@@ -122,7 +122,7 @@ const UniversalSearchModal: React.FC<UniversalSearchModalProps> = ({ isOpen, onC
               ))}
             </ul>
           ) : (
-            <div className="text-center p-16 text-on-surface-variant">
+            <div className="text-center p-16 text-on-surface-variant body-large">
               {query ? `No results for "${query}"` : 'Search for projects, notes, and tasks.'}
             </div>
           )}

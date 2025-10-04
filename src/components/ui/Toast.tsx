@@ -55,7 +55,7 @@ const Toast: React.FC<ToastProps> = ({ message, type, onDismiss }) => {
       className={`relative flex items-center gap-4 w-full max-w-sm p-4 rounded-lg shadow-3 text-on-primary ${config.style} transition-all duration-300 ease-in-out transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
     >
       <div className="flex-shrink-0">{config.icon}</div>
-      <p className="font-medium flex-grow">{message}</p>
+      <p className="flex-grow body-large">{message}</p>
       <button onClick={onDismiss} aria-label="Dismiss" className="p-1 rounded-full hover:bg-white/20 transition-colors">
         <CloseIcon className="w-5 h-5" />
       </button>

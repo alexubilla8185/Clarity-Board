@@ -24,7 +24,7 @@ const Header: React.FC<HeaderProps> = ({ onToggleSidebar, pageTitle }) => {
 
                     {/* Page Title */}
                     <div className="flex-1 min-w-0 px-12 md:px-0">
-                        <h1 className="text-xl font-bold text-on-surface text-center truncate">
+                        <h1 className="text-on-surface text-center truncate title-large">
                             {pageTitle}
                         </h1>
                     </div>

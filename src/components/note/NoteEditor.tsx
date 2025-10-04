@@ -76,13 +76,13 @@ const NoteEditor: React.FC<NoteEditorProps> = ({ initialNoteData, onNoteUpdate }
                 <div className="flex items-center bg-surface-container rounded-lg p-1">
                      <button 
                         onClick={() => setViewMode('edit')}
-                        className={`px-3 py-1 text-sm font-medium rounded-md ${viewMode === 'edit' ? 'bg-primary text-on-primary shadow-1' : 'text-on-surface-variant'}`}
+                        className={`px-3 py-1 rounded-md label-large ${viewMode === 'edit' ? 'bg-primary text-on-primary shadow-1' : 'text-on-surface-variant'}`}
                     >
                         Edit
                     </button>
                     <button 
                         onClick={() => setViewMode('preview')}
-                        className={`px-3 py-1 text-sm font-medium rounded-md ${viewMode === 'preview' ? 'bg-primary text-on-primary shadow-1' : 'text-on-surface-variant'}`}
+                        className={`px-3 py-1 rounded-md label-large ${viewMode === 'preview' ? 'bg-primary text-on-primary shadow-1' : 'text-on-surface-variant'}`}
                     >
                         Preview
                     </button>
@@ -96,7 +96,7 @@ const NoteEditor: React.FC<NoteEditorProps> = ({ initialNoteData, onNoteUpdate }
                         ref={textareaRef}
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
-                        className="w-full h-full flex-grow p-4 rounded-b-md bg-surface text-on-surface border border-outline focus:outline-none focus:ring-2 focus:ring-primary resize-none font-mono"
+                        className="w-full h-full flex-grow p-4 rounded-b-md bg-surface text-on-surface border border-outline focus:outline-none focus:ring-2 focus:ring-primary resize-none font-mono body-large"
                         placeholder="Start writing your note..."
                     />
                 </div>
@@ -109,13 +109,25 @@ const NoteEditor: React.FC<NoteEditorProps> = ({ initialNoteData, onNoteUpdate }
              <style>{`
                 .prose {
                     color: rgb(var(--color-on-surface));
-                    line-height: 1.7;
                 }
-                .prose h1, .prose h2, .prose h3, .prose h4, .prose strong {
+                .prose h1 {
+                    color: rgb(var(--color-on-surface));
+                    font-size: 1.75rem; line-height: 2.25rem; font-weight: 400; /* headline-medium */
+                }
+                 .prose h2 {
+                    color: rgb(var(--color-on-surface));
+                    font-size: 1.375rem; line-height: 1.75rem; font-weight: 500; /* title-large */
+                }
+                 .prose h3 {
+                    color: rgb(var(--color-on-surface));
+                    font-size: 1rem; line-height: 1.5rem; font-weight: 500; letter-spacing: 0.009375em; /* title-medium */
+                }
+                .prose strong {
                      color: rgb(var(--color-on-surface));
                 }
                 .prose p, .prose li {
                     color: rgb(var(--color-on-surface-variant));
+                    font-size: 1rem; line-height: 1.5rem; font-weight: 400; letter-spacing: 0.005em; /* body-large */
                 }
                 .prose a { color: rgb(var(--color-primary)); }
                 .prose ul { list-style-type: disc; }

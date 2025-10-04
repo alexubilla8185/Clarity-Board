@@ -24,7 +24,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between items-center mb-4">
-          <h2 id="modal-title" className="text-xl font-semibold text-on-surface">{title}</h2>
+          <h2 id="modal-title" className="text-on-surface title-large">{title}</h2>
           <button onClick={onClose} className="text-on-surface-variant hover:text-on-surface transition-colors" aria-label="Close modal">
             <CloseIcon className="w-6 h-6" />
           </button>

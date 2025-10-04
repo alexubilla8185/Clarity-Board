@@ -20,10 +20,16 @@ const Avatar: React.FC<AvatarProps> = ({ userSettings, size = 'md', className = 
   };
 
   const sizeClasses = {
-    sm: 'w-8 h-8 text-xs',
-    md: 'w-12 h-12 text-lg',
-    lg: 'w-24 h-24 text-3xl',
+    sm: 'w-8 h-8',
+    md: 'w-12 h-12',
+    lg: 'w-24 h-24',
   };
+
+  const fontClasses = {
+      sm: 'label-large',
+      md: 'title-large',
+      lg: 'display-small',
+  }
 
   const baseClasses = `rounded-full flex items-center justify-center font-bold object-cover flex-shrink-0`;
 
@@ -50,7 +56,7 @@ const Avatar: React.FC<AvatarProps> = ({ userSettings, size = 'md', className = 
   if (initials && initials !== '?') {
     return (
       <div
-        className={`${baseClasses} ${sizeClasses[size]} bg-primary/20 text-primary ${className}`}
+        className={`${baseClasses} ${sizeClasses[size]} ${fontClasses[size]} bg-primary/20 text-primary ${className}`}
       >
         {initials.toUpperCase()}
       </div>

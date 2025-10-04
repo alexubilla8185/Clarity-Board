@@ -17,7 +17,7 @@
   ],
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#1f2937",
-  "background_color": "#111827",
+  "theme_color": "#212329",
+  "background_color": "#121212",
   "description": "A privacy-first, offline-ready productivity board."
 }

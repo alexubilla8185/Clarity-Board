@@ -74,18 +74,18 @@ const AIFeatureModal: React.FC<AIFeatureModalProps> = ({ isOpen, onClose, card, 
     <Modal isOpen={isOpen} onClose={onClose} title={`Enhance Card: "${card.title}"`}>
       <div className="flex flex-col space-y-4 max-h-[70vh]">
         <div>
-          <h3 className="text-lg font-medium text-on-surface-variant mb-2">Original Text</h3>
-          <p className="bg-surface-container p-3 rounded-md text-on-surface whitespace-pre-wrap max-h-28 overflow-y-auto">{card.description || card.title}</p>
+          <h3 className="title-medium text-on-surface-variant mb-2">Original Text</h3>
+          <p className="bg-surface-container p-3 rounded-md text-on-surface whitespace-pre-wrap max-h-28 overflow-y-auto body-medium">{card.description || card.title}</p>
         </div>
 
         <div className="flex flex-wrap gap-2 justify-center border-t border-b border-outline py-4 flex-shrink-0">
-          <button onClick={() => handleAiAction(AIOption.BRAINSTORM)} disabled={isLoading} className="bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 font-medium py-2 px-4 rounded-sm transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+          <button onClick={() => handleAiAction(AIOption.BRAINSTORM)} disabled={isLoading} className="bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 py-2 px-4 rounded-sm transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed label-large">
             <SparklesIcon className="w-5 h-5" /> Brainstorm
           </button>
-          <button onClick={() => handleAiAction(AIOption.SUMMARIZE)} disabled={isLoading} className="bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 font-medium py-2 px-4 rounded-sm transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+          <button onClick={() => handleAiAction(AIOption.SUMMARIZE)} disabled={isLoading} className="bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 py-2 px-4 rounded-sm transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed label-large">
             <SparklesIcon className="w-5 h-5" /> Summarize
           </button>
-          <button onClick={() => handleAiAction(AIOption.IMPROVE)} disabled={isLoading} className="bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 font-medium py-2 px-4 rounded-sm transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+          <button onClick={() => handleAiAction(AIOption.IMPROVE)} disabled={isLoading} className="bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 py-2 px-4 rounded-sm transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed label-large">
             <SparklesIcon className="w-5 h-5" /> Improve
           </button>
         </div>
@@ -94,16 +94,16 @@ const AIFeatureModal: React.FC<AIFeatureModalProps> = ({ isOpen, onClose, card, 
             {isLoading && (
               <div className="text-center p-4 flex flex-col items-center justify-center h-full">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
-                <p className="mt-4 text-on-surface-variant animate-pulse">{loadingMessage}</p>
+                <p className="mt-4 text-on-surface-variant animate-pulse body-large">{loadingMessage}</p>
               </div>
             )}
 
-            {error && <p className="text-error bg-error/10 p-3 rounded-md">{error}</p>}
+            {error && <p className="text-error bg-error/10 p-3 rounded-md body-medium">{error}</p>}
             
             {aiResult && (
               <div className="space-y-3">
-                <h3 className="text-lg font-medium text-on-surface-variant">AI Suggestion</h3>
-                <div className="bg-surface-container p-3 rounded-md text-on-surface whitespace-pre-wrap">{aiResult}</div>
+                <h3 className="title-medium text-on-surface-variant">AI Suggestion</h3>
+                <div className="bg-surface-container p-3 rounded-md text-on-surface whitespace-pre-wrap body-medium">{aiResult}</div>
               </div>
             )}
         </div>
@@ -112,7 +112,7 @@ const AIFeatureModal: React.FC<AIFeatureModalProps> = ({ isOpen, onClose, card, 
             <div className="pt-4 border-t border-outline flex-shrink-0">
                 <button
                 onClick={handleApplyResult}
-                className="w-full bg-primary hover:bg-primary/90 text-on-primary font-bold py-2 px-4 rounded-sm transition-colors"
+                className="w-full bg-primary hover:bg-primary/90 text-on-primary py-2 px-4 rounded-sm transition-colors label-large"
                 >
                 Apply to Card Description
                 </button>
