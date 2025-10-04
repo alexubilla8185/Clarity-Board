@@ -255,7 +255,6 @@ const Board: React.FC<BoardProps> = ({ project, onProjectUpdate, onDeleteColumn 
     }
   };
 
-  // FIX: Although the error points to line 312, it's a misleading TypeScript error. The actual issue is that a library (dnd-kit) might be implicitly rendering ListColumnDroppable without children. Making the `children` prop optional fixes this type error.
   const ListColumnDroppable = ({ id, children }: {id: string, children?: React.ReactNode}) => {
     const { setNodeRef } = useDroppable({ id, data: { type: 'Column' } });
     return <div ref={setNodeRef} className="min-h-[80px] rounded-lg bg-black/5 dark:bg-white/5">{children}</div>;

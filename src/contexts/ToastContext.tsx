@@ -38,7 +38,6 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   return (
     <ToastContext.Provider value={{ showToast }}>
       {children}
-      {/* FIX: ToastContainer was used without being imported. */}
       <ToastContainer toasts={toasts} onDismiss={removeToast} />
     </ToastContext.Provider>
   );
