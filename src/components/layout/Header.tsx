@@ -23,12 +23,12 @@ const Header: React.FC<HeaderProps> = ({ onToggleSidebar, pageTitle }) => {
                                 <MenuIcon className="h-6 w-6" />
                             </button>
                         </div>
-                        <img src="public/favicon.svg" alt="" className="w-8 h-8 md:hidden" aria-hidden="true" />
+                        <img src="/favicon.svg" alt="" className="w-8 h-8 md:hidden" aria-hidden="true" />
                     </div>
 
                     {/* Center: Page Title */}
                     <div className="flex-1 min-w-0 flex justify-center items-center gap-2">
-                        <img src="public/favicon.svg" alt="" className="w-6 h-6 hidden md:block" aria-hidden="true" />
+                        <img src="/favicon.svg" alt="" className="w-6 h-6 hidden md:block" aria-hidden="true" />
                         <h1 className="text-on-surface truncate title-large">
                             {pageTitle}
                         </h1>
