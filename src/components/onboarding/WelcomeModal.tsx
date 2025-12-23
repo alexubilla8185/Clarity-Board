@@ -14,7 +14,7 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ isOpen, onStartFresh, onTry
   return (
     <div className="fixed inset-0 bg-surface/90 backdrop-blur-sm z-50 flex items-center justify-center p-4">
       <div className="bg-surface-container rounded-lg shadow-3 w-full max-w-3xl text-center p-6 md:p-12 animate-fade-in-up max-h-[95vh] overflow-y-auto">
-        <img src="/favicon.svg" alt="Clarity Board Logo" className="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 md:mb-6" />
+        <img src="public/favicon.svg" alt="Clarity Board Logo" className="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 md:mb-6" />
         <h1 className="text-on-surface display-medium">
           Welcome to <span className="text-primary">Clarity Board</span>
         </h1>
