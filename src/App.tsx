@@ -462,7 +462,7 @@ function App() {
         ></button>
       )}
 
-      <div className={`flex-1 flex flex-col transition-all duration-300 ease-in-out ${isSidebarOpen ? 'md:ml-64' : 'ml-0'}`}>
+      <div className={`relative flex-1 flex flex-col transition-all duration-300 ease-in-out ${isSidebarOpen ? 'md:ml-64' : 'ml-0'}`}>
         <Header 
           onToggleSidebar={() => setSidebarOpen(!isSidebarOpen)}
           pageTitle={getPageTitle()}
@@ -506,14 +506,14 @@ function App() {
             />
           )}
         </main>
+        
+        {!isWelcomeModalOpen && (
+          <FloatingActionButton 
+              onAddProject={(type) => handleOpenCreateModal('project', { projectType: type })} 
+              onOpenSmartSplitModal={() => setIsSmartSplitModalOpen(true)}
+          />
+        )}
       </div>
-
-      {!isWelcomeModalOpen && (
-        <FloatingActionButton 
-            onAddProject={(type) => handleOpenCreateModal('project', { projectType: type })} 
-            onOpenSmartSplitModal={() => setIsSmartSplitModalOpen(true)}
-        />
-      )}
 
       <WelcomeModal
         isOpen={isWelcomeModalOpen}

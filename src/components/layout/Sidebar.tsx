@@ -1,3 +1,4 @@
+
 import * as React from 'react';
 import { AppData, Category, ProjectType, UserSettings, CurrentView } from '../../types';
 import { HomeIcon, PlusIcon, DotsHorizontalIcon, EditIcon, TrashIcon, ChevronDownIcon, ProjectIcon, QuestionMarkCircleIcon } from '../ui/Icons';
@@ -168,7 +169,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, appData, setAppData, c
     return (
         <aside className={`fixed top-0 left-0 h-full w-64 bg-surface z-40 transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 transition-transform duration-300 ease-in-out border-r border-outline flex flex-col`}>
             <div className="p-4 flex items-center gap-3 flex-shrink-0">
-                <img src="/favicon.svg" alt="Clarity Board Logo" className="w-8 h-8" />
+                <img src="public/favicon.svg" alt="Clarity Board Logo" className="w-8 h-8" />
                 <h1 className="text-on-surface headline-small">
                     <span className="text-primary">Clarity</span> Board
                 </h1>

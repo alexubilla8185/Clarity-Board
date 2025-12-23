@@ -30,7 +30,7 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({ onAddProjec
     };
 
     return (
-        <div className="fixed bottom-6 right-6 z-40">
+        <div className="absolute bottom-6 right-6 z-40">
             <div className={`flex flex-col items-center gap-4 transition-all duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
                 {actions.slice().reverse().map((action, index) => (
                     <button
